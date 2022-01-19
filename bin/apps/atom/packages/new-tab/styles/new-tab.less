@@ -1,0 +1,153 @@
+.tab-bar {
+	.tab.new-tab {
+		flex-grow: 0;
+		z-index: 0;
+
+		&.active {
+			flex-grow: 0;
+			z-index: 0;
+		}
+
+		&.new-tab-prepend {
+			position: absolute;
+			left: 0;
+		}
+
+		&.new-tab-sticky {
+			position: absolute;
+			right: 0;
+		}
+
+		.title {
+			-webkit-mask: initial !important;
+            margin-left: 1em;
+            margin-right: 1em;
+		}
+	}
+
+	&.new-tab-none {
+		.tab.new-tab.new-tab-prepend,
+		.tab.new-tab.new-tab-append,
+		.tab.new-tab.new-tab-sticky {
+			display: none;
+		}
+	}
+
+	&.new-tab-left {
+		.tab.new-tab.new-tab-append,
+		.tab.new-tab.new-tab-sticky {
+			display: none;
+		}
+	}
+
+	&.new-tab-center {
+		.tab.new-tab.new-tab-prepend,
+		.tab.new-tab.new-tab-sticky {
+			display: none;
+		}
+	}
+
+	&.new-tab-center-right {
+		.tab.new-tab.new-tab-prepend {
+			display: none;
+		}
+	}
+
+	&.new-tab-right {
+		.tab.new-tab.new-tab-prepend {
+			display: none;
+		}
+
+		.tab.new-tab.new-tab-append {
+			visibility: hidden;
+		}
+	}
+}
+
+// Theme adjustments
+.theme-atom-dark-ui,
+.theme-atom-light-ui {
+	.tab-bar {
+		.tab.new-tab {
+			min-width: 15px;
+			width: 15px;
+			text-align: center;
+
+			&.new-tab-sticky {
+				right: 10px;
+			}
+		}
+
+		&.new-tab-left {
+			padding-left: 40px;
+		}
+	}
+}
+
+.theme-one-dark-ui,
+.theme-one-light-ui {
+	.tab-bar {
+		.tab.new-tab {
+			min-width: 40px;
+			width: 40px;
+
+			&.new-tab-prepend {
+				border-width: 0;
+			}
+		}
+
+		&.new-tab-left {
+			padding-left: 40px;
+
+			.tab:first-child {
+				border-width: 0 0 0 1px;
+			}
+		}
+	}
+}
+
+// https://atom.io/themes/atom-material-ui
+.theme-atom-material-ui {
+	.tab-bar {
+		.tab.new-tab {
+			min-width: 3rem;
+			text-align: center;
+			width: -webkit-fit-content;
+
+			.title {
+				padding: 0;
+
+				.icon::before {
+					margin-right: 0;
+				}
+			}
+		}
+
+		&.new-tab-left {
+			padding-left: 3rem;
+		}
+	}
+	&.compact-tab-bar .tab-bar {
+		.tab.new-tab {
+			min-width: 2.5rem;
+		}
+
+		&.new-tab-left {
+			padding-left: 2.5rem;
+		}
+	}
+}
+
+// https://atom.io/themes/metro-ui
+.theme-metro-ui {
+	.tab-bar {
+		.tab.new-tab {
+			min-width: 40px;
+			width: 40px;
+		}
+
+		&.new-tab-left {
+			padding-left: 40px;
+		}
+	}
+}

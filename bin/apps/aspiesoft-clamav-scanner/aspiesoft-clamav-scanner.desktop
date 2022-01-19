@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=bash /etc/aspiesoft-clamav-scanner/start.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=aspiesoft-clamav-scanner.desktop
+Name=test
+Comment[en_US]=
+Comment=

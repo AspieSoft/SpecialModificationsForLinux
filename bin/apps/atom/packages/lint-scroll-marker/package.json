@@ -1,0 +1,74 @@
+{
+  "_from": "https://www.atom.io/api/packages/lint-scroll-marker/versions/0.3.0/tarball",
+  "_id": "lint-scroll-marker@0.3.0",
+  "_inBundle": false,
+  "_integrity": "sha512-7JARE6ucvRKVLWkEOy/juAzppVYO30DGY/kFeCFU3gu1hAHSLtu/tRdItiePuv6ac3w3s2Z9kdZWA9gKNAvbuA==",
+  "_location": "/lint-scroll-marker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/lint-scroll-marker/versions/0.3.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/lint-scroll-marker/versions/0.3.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/lint-scroll-marker/versions/0.3.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/lint-scroll-marker/versions/0.3.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/lint-scroll-marker/versions/0.3.0/tarball",
+  "_shasum": "30f3002a9a11c756038d7927d3f2342a58b21217",
+  "_spec": "https://www.atom.io/api/packages/lint-scroll-marker/versions/0.3.0/tarball",
+  "_where": "/tmp/apm-install-dir-202172-26495-1mqt5p3.9uhn",
+  "bugs": {
+    "url": "https://github.com/surdu/lint-scroll-marker/issues"
+  },
+  "bundleDependencies": false,
+  "consumedServices": {
+    "scroll-marker": {
+      "versions": {
+        "0.1.0": "consumeScrollMarker"
+      }
+    },
+    "diagnostics-store": {
+      "versions": {
+        "0.3.0": "consumeDiagnosticUpdates"
+      }
+    }
+  },
+  "dependencies": {
+    "atom-package-deps": "^4.6.2"
+  },
+  "deprecated": false,
+  "description": "Highlights linter errors on the scroll bar",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/surdu/lint-scroll-marker#readme",
+  "keywords": [
+    "scroll bar",
+    "scrollbar",
+    "highlight",
+    "linter",
+    "nuclide",
+    "atom-ide-ui"
+  ],
+  "license": "MIT",
+  "main": "./lib/lint-scroll-marker",
+  "name": "lint-scroll-marker",
+  "package-deps": [
+    "scroll-marker"
+  ],
+  "providedServices": {
+    "linter-ui": {
+      "versions": {
+        "1.0.0": "provideUI"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surdu/lint-scroll-marker.git"
+  },
+  "version": "0.3.0"
+}

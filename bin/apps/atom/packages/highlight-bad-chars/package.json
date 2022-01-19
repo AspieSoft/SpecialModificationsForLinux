@@ -1,0 +1,56 @@
+{
+  "_from": "https://www.atom.io/api/packages/highlight-bad-chars/versions/2.0.0/tarball",
+  "_id": "highlight-bad-chars@2.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-bWoCNQQk5PWx7gycDKTsvmMqiACXfv2Wz9bYs0cBoHYLwD2EiJdTz36MZkRdyq3EE7Jc2Z9jONGADGdFAzJUmA==",
+  "_location": "/highlight-bad-chars",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/highlight-bad-chars/versions/2.0.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/highlight-bad-chars/versions/2.0.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/highlight-bad-chars/versions/2.0.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/highlight-bad-chars/versions/2.0.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/highlight-bad-chars/versions/2.0.0/tarball",
+  "_shasum": "7557e773fe99d3f68f9ba08f2efec94b8f50dcd9",
+  "_spec": "https://www.atom.io/api/packages/highlight-bad-chars/versions/2.0.0/tarball",
+  "_where": "/tmp/apm-install-dir-202172-25389-z2eimj.vnjs",
+  "bugs": {
+    "url": "https://github.com/ohanhi/atom-highlight-bad-chars/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Highlight Unicode characters that can cause issues in source code.",
+  "devDependencies": {
+    "prettier": "^1.15.3",
+    "prettier-check": "^2.0.0"
+  },
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "homepage": "https://github.com/ohanhi/atom-highlight-bad-chars#readme",
+  "keywords": [
+    "highlight",
+    "unicode",
+    "invisible characters",
+    "confusables"
+  ],
+  "license": "MIT",
+  "main": "./lib/highlight-bad-chars",
+  "name": "highlight-bad-chars",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohanhi/atom-highlight-bad-chars.git"
+  },
+  "scripts": {
+    "format": "npx prettier --write \"{lib,spec,styles}/*.{js,less}\"",
+    "test": "npx prettier-check \"{lib,spec,styles}/*.{js,less}\""
+  },
+  "version": "2.0.0"
+}

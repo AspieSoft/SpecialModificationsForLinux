@@ -1,0 +1,46 @@
+{
+  "_from": "https://www.atom.io/api/packages/highlight-line/versions/0.12.0/tarball",
+  "_id": "highlight-line@0.12.0",
+  "_inBundle": false,
+  "_integrity": "sha512-RwllRslmhQBgFXjnauQunJEkyg1jV8GDuLmlsReIoHC/TNcHFOWxX2QhndhWPwebuIDGu8nGO3OjKtWyeSioqQ==",
+  "_location": "/highlight-line",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/highlight-line/versions/0.12.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/highlight-line/versions/0.12.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/highlight-line/versions/0.12.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/highlight-line/versions/0.12.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/highlight-line/versions/0.12.0/tarball",
+  "_shasum": "c012c42ebefc53875565244f070527f8a5e379f3",
+  "_spec": "https://www.atom.io/api/packages/highlight-line/versions/0.12.0/tarball",
+  "_where": "/tmp/apm-install-dir-202172-26645-s840io.smj6d",
+  "bugs": {
+    "url": "https://github.com/richrace/highlight-line/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Highlights the current line in the editor",
+  "devDependencies": {
+    "coffee-script": "1.9.0",
+    "coffeelint": "1.8.1",
+    "coffeelint-jasmine": "0.0.2"
+  },
+  "engines": {
+    "atom": ">=1.13.0 <2.0.0"
+  },
+  "homepage": "https://github.com/richrace/highlight-line",
+  "license": "MIT",
+  "main": "./lib/highlight-line",
+  "name": "highlight-line",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richrace/highlight-line.git"
+  },
+  "version": "0.12.0"
+}

@@ -1,0 +1,60 @@
+{
+  "_from": "https://www.atom.io/api/packages/new-tab/versions/0.5.3/tarball",
+  "_id": "new-tab@0.5.3",
+  "_inBundle": false,
+  "_integrity": "sha512-qPcifL8EnBnCXDtkgKq21OkYnsas69wI7QfvN1IoLPb+Sj4lbjrBKzQm+f/Ai8Bw0Admzh86NnOmyRfbY0uy+Q==",
+  "_location": "/new-tab",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/new-tab/versions/0.5.3/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/new-tab/versions/0.5.3/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/new-tab/versions/0.5.3/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/new-tab/versions/0.5.3/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/new-tab/versions/0.5.3/tarball",
+  "_shasum": "954c8e1d4d8ce438a98a4fcd643bd2b03d54df78",
+  "_spec": "https://www.atom.io/api/packages/new-tab/versions/0.5.3/tarball",
+  "_where": "/tmp/apm-install-dir-202172-25472-15tdndv.wv66",
+  "author": {
+    "name": "Jeroen van Warmerdam",
+    "email": "jeronevw@hotmail.com",
+    "url": "https://github.com/jerone"
+  },
+  "bugs": {
+    "url": "https://github.com/jerone/atom-new-tab/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "atom-space-pen-views": "^2.2.0"
+  },
+  "deprecated": false,
+  "description": "New Tab is a button on the tab bar which easily creates a new file.",
+  "devDependencies": {
+    "coffeelint": "^1.14.2"
+  },
+  "engines": {
+    "atom": ">=1.3.0"
+  },
+  "homepage": "https://github.com/jerone/atom-new-tab",
+  "keywords": [
+    "tab",
+    "tabs",
+    "tabbar",
+    "new tab",
+    "new file"
+  ],
+  "license": "MIT",
+  "main": "./lib/new-tab",
+  "name": "new-tab",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerone/atom-new-tab.git"
+  },
+  "version": "0.5.3"
+}

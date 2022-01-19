@@ -1,0 +1,92 @@
+{
+  "_from": "https://www.atom.io/api/packages/highlight-selected/versions/0.17.0/tarball",
+  "_id": "highlight-selected@0.17.0",
+  "_inBundle": false,
+  "_integrity": "sha512-faDT7mf+gZoTYDdf6C4ri10bUWuy66tGw+AC0DLfUIUkxVco8pFefqrfxVheRse3WeU+744l2um9o+YiSlKJlg==",
+  "_location": "/highlight-selected",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/highlight-selected/versions/0.17.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/highlight-selected/versions/0.17.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/highlight-selected/versions/0.17.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/highlight-selected/versions/0.17.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/highlight-selected/versions/0.17.0/tarball",
+  "_shasum": "35fc149e1bf8097bdee90913faccd100100ef159",
+  "_spec": "https://www.atom.io/api/packages/highlight-selected/versions/0.17.0/tarball",
+  "_where": "/tmp/apm-install-dir-202172-25549-1l68bq1.1jnt",
+  "bugs": {
+    "url": "https://github.com/richrace/highlight-selected/issues"
+  },
+  "bundleDependencies": false,
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    },
+    "scroll-marker": {
+      "versions": {
+        "0.1.0": "consumeScrollMarker"
+      }
+    }
+  },
+  "dependencies": {
+    "atom-package-deps": "^5.0.0",
+    "debounce": "^1.2.0",
+    "grim": "^2.0.2"
+  },
+  "deprecated": false,
+  "description": "Highlights the current word selected when double clicking",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.3"
+  },
+  "dist": {
+    "shasum": "7c9da46b1412aceb069f8ca2ca54d014986ad408"
+  },
+  "engines": {
+    "atom": ">=1.13.0 <2.0.0"
+  },
+  "homepage": "https://github.com/richrace/highlight-selected",
+  "keywords": [
+    "highlight selected",
+    "highlight selection",
+    "highlight occurrences"
+  ],
+  "license": "MIT",
+  "main": "./lib/main",
+  "name": "highlight-selected",
+  "package-deps": [
+    "scroll-marker"
+  ],
+  "providedServices": {
+    "highlightSelected": {
+      "description": "Exposes Highlight Selected Events",
+      "versions": {
+        "1.0.0": "provideHighlightSelectedV1Deprecated",
+        "2.0.0": "provideHighlightSelectedV2"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richrace/highlight-selected.git"
+  },
+  "scripts": {
+    "check": "npm run lint && npm run test",
+    "lint": "eslint lib spec",
+    "test": "atom --test spec"
+  },
+  "version": "0.17.0"
+}

@@ -1,0 +1,46 @@
+{
+  "_from": "https://www.atom.io/api/packages/the-closer/versions/0.7.0/tarball",
+  "_id": "the-closer@0.7.0",
+  "_inBundle": false,
+  "_integrity": "sha512-utick0rNNzqgVb7Xk2n4RRjA7ESYkLXgJ5ayZvWKiQwJBjThCfN4o+8uBdzn21bzTXkNn6hx9EevzDiGpUBXqg==",
+  "_location": "/the-closer",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/the-closer/versions/0.7.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/the-closer/versions/0.7.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/the-closer/versions/0.7.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/the-closer/versions/0.7.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/the-closer/versions/0.7.0/tarball",
+  "_shasum": "abd1efad9643f5ccd23c22e2682eae335b751a59",
+  "_spec": "https://www.atom.io/api/packages/the-closer/versions/0.7.0/tarball",
+  "_where": "/tmp/apm-install-dir-202172-25835-1wkfa1p.y621",
+  "bugs": {
+    "url": "https://github.com/izuzak/atom-the-closer/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Closes the window when or after the last tab is closed. Doesn't ask any questions.",
+  "engines": {
+    "atom": ">=1.17.0 <2.0.0"
+  },
+  "homepage": "https://github.com/izuzak/atom-the-closer",
+  "keywords": [
+    "tabs",
+    "autoclose",
+    "window"
+  ],
+  "license": "MIT",
+  "main": "./lib/the-closer",
+  "name": "the-closer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izuzak/atom-the-closer.git"
+  },
+  "version": "0.7.0"
+}

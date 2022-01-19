@@ -1,0 +1,87 @@
+{
+  "_from": "https://www.atom.io/api/packages/find-scroll-marker/versions/0.1.3/tarball",
+  "_id": "find-scroll-marker@0.1.3",
+  "_inBundle": false,
+  "_integrity": "sha512-GDmBUfS3c1Tb9yx/3Uf0Qn3TNpepIqxqGxSNSij8P1mOe/IK3E1xnIsG0or8P8XEYFtcYZp55/NZPlRxqDrAAg==",
+  "_location": "/find-scroll-marker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/find-scroll-marker/versions/0.1.3/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/find-scroll-marker/versions/0.1.3/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/find-scroll-marker/versions/0.1.3/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/find-scroll-marker/versions/0.1.3/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/find-scroll-marker/versions/0.1.3/tarball",
+  "_shasum": "b50ce79388171bdc35906cdc02d34f64a439c46c",
+  "_spec": "https://www.atom.io/api/packages/find-scroll-marker/versions/0.1.3/tarball",
+  "_where": "/tmp/apm-install-dir-202172-26462-1o691gu.9s8r",
+  "activationCommands": {
+    "atom-workspace": [
+      "project-find:show",
+      "project-find:toggle",
+      "project-find:show-in-current-directory",
+      "find-and-replace:show",
+      "find-and-replace:toggle",
+      "find-and-replace:find-all",
+      "find-and-replace:find-next",
+      "find-and-replace:find-previous",
+      "find-and-replace:find-next-selected",
+      "find-and-replace:find-previous-selected",
+      "find-and-replace:use-selection-as-find-pattern",
+      "find-and-replace:show-replace",
+      "find-and-replace:replace-next",
+      "find-and-replace:replace-all",
+      "find-and-replace:select-next",
+      "find-and-replace:select-all",
+      "find-and-replace:clear-history"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/surdu/find-scroll-marker/issues"
+  },
+  "bundleDependencies": false,
+  "consumedServices": {
+    "scroll-marker": {
+      "versions": {
+        "0.1.0": "consumeScrollMarker"
+      }
+    },
+    "find-and-replace": {
+      "versions": {
+        "0.0.1": "consumeFind"
+      }
+    }
+  },
+  "dependencies": {
+    "atom-package-deps": "^4.6.2"
+  },
+  "deprecated": false,
+  "description": "Highlights search results on the scroll bar",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/surdu/find-scroll-marker#readme",
+  "keywords": [
+    "find",
+    "replace",
+    "scrollbar",
+    "scroll bar",
+    "highlight results"
+  ],
+  "license": "MIT",
+  "main": "./lib/find-scroll-marker",
+  "name": "find-scroll-marker",
+  "package-deps": [
+    "scroll-marker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surdu/find-scroll-marker.git"
+  },
+  "version": "0.1.3"
+}

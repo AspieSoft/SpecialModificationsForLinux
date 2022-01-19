@@ -1,0 +1,27 @@
+"*":
+  core:
+    closeDeletedFileTabs: true
+    disabledPackages: [
+      "about"
+      "dev-live-reload"
+      "git-diff"
+      "github"
+      "open-on-github"
+      "welcome"
+    ]
+    telemetryConsent: "no"
+    uriHandlerRegistration: "never"
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+  "highlight-selected":
+    hideHighlightOnSelectedWord: true
+    highlightBackground: true
+    lightTheme: true
+    showResultsOnScrollBar: true
+  "new-tab":
+    position: "Left"
+  welcome:
+    showOnStartup: false
