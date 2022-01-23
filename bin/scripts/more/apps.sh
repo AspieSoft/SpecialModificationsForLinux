@@ -7,10 +7,11 @@ function apps_getOpts() {
   local installWine=$(ynInput "Would you like to Install WINE" "y")
   local installIce=$(ynInput "Would you like to Install ICE" "y")
   local installRecommended=$(ynInput "Would you like to Install Recommended Apps" "y")
+  local installKeyboardCursor=$(ynInput "Would you like to Install Aspiesoft Keyboard Cursor [CapsLock to enable, arrow keys to move mouse]" "n")
   # local installExtras=$(ynInput "Would you like to Install Ubuntu Restricted Extras" "y")
 
-  # echo "$installNemo $installWine $installIce $installRecommended $installExtras"
-  echo "$installNemo $installWine $installIce $installRecommended"
+  # echo "$installNemo $installWine $installIce $installRecommended $installKeyboardCursor $installExtras"
+  echo "$installNemo $installWine $installIce $installRecommended $installKeyboardCursor"
 
   unset installNemo
   unset installWine

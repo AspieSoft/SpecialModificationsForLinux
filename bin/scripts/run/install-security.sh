@@ -41,7 +41,7 @@ loading=$(startLoading "Adding Security Scanners")
 runLoading "$loading"
 
 
-loading=$(startLoading "Setting Up Cron Jobs")
+loading=$(startLoading "Setting Up Download Scanner")
 (
   sudo mkdir -p /etc/aspiesoft-clamav-scanner
   sudo cp -R -f ./bin/apps/aspiesoft-clamav-scanner/* /etc/aspiesoft-clamav-scanner

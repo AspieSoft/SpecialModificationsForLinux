@@ -17,7 +17,8 @@ installNemo="$1"
 installWine="$2"
 installIce="$3"
 installRecommended="$4"
-# installExtras="$5"
+installKeyboardCursor="$5"
+# installExtras="$6"
 
 
 # add repositories
@@ -129,6 +130,25 @@ if [ $(hasPackage "chromium-browser") = "false" ] ; then
   loading=$(startLoading "Installing Chromium")
   (
     sudo apt -y install chromium-browser &>/dev/null
+    endLoading "$loading"
+  ) &
+  runLoading "$loading"
+fi
+
+
+if [ "$installKeyboardCursor" = true ] ; then
+  loading=$(startLoading "Setting Up Keyboard Cursor")
+  (
+    sudo apt -y install xinput xdotool
+
+    sudo mkdir -p /etc/aspiesoft-keyboard-cursor
+    sudo cp -R -f ./bin/apps/aspiesoft-keyboard-cursor/* /etc/aspiesoft-keyboard-cursor
+    sudo rm -f /etc/aspiesoft-keyboard-cursor/aspiesoft-keyboard-cursor.desktop
+
+    sudo cp -f ./bin/apps/aspiesoft-keyboard-cursor/aspiesoft-keyboard-cursor.desktop /home/shaynejr/.config/autostart
+
+    bash /etc/aspiesoft-keyboard-cursor/start.sh &
+
     endLoading "$loading"
   ) &
   runLoading "$loading"
