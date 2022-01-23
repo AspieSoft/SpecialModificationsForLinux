@@ -139,7 +139,7 @@ fi
 if [ "$installKeyboardCursor" = true ] ; then
   loading=$(startLoading "Setting Up Keyboard Cursor")
   (
-    sudo apt -y install xinput xdotool
+    sudo apt -y install xinput xdotool &>/dev/null
 
     sudo mkdir -p /etc/aspiesoft-keyboard-cursor
     sudo cp -R -f ./bin/apps/aspiesoft-keyboard-cursor/* /etc/aspiesoft-keyboard-cursor
