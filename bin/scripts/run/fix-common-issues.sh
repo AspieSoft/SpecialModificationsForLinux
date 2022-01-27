@@ -55,6 +55,17 @@ loading=$(startLoading "Installing linux file systems")
 runLoading "$loading"
 
 
+loading=$(startLoading "Installing hplip-gui for printer")
+(
+  sudo apt -y install hplip-gui &>/dev/null
+
+  xdg-open https://askubuntu.com/a/977851 &>/dev/null 2>&1 & disown
+
+  endLoading "$loading"
+) &
+runLoading "$loading"
+
+
 loading=$(startLoading "Fixing other issues")
 (
   # hide snap folder
