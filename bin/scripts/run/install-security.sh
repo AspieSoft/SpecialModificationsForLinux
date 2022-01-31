@@ -11,10 +11,12 @@ trap cleanup EXIT
 loading=$(startLoading "Adding Security Scanners")
 (
 
-  #sudo apt -y install clamtk clamav &>/dev/null
-
   if [ $(hasPackage "clamav") = "false" ] ; then
     sudo apt -y install clamav &>/dev/null
+  fi
+
+  if [ $(hasPackage "clamav-daemon") = "false" ] ; then
+    sudo apt -y install clamav-daemon &>/dev/null
   fi
 
   if [ $(hasPackage "clamtk") = "false" ] ; then
@@ -27,6 +29,47 @@ loading=$(startLoading "Adding Security Scanners")
   sudo freshclam &>/dev/null
   sudo mkdir -p /VirusScan/quarantine &>/dev/null
   sudo chmod 664 /VirusScan/quarantine &>/dev/null
+
+  # fix clamav permissions
+  if grep -R "^ScanOnAccess " "/etc/clamav/clamd.conf"; then
+    sudo sed -r -i 's/^ScanOnAccess (.*)$/ScanOnAccess true/m' /etc/clamav/clamd.conf
+  else
+    echo 'ScanOnAccess true' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+  fi
+
+  if grep -R "^OnAccessMountPath " "/etc/clamav/clamd.conf"; then
+    sudo sed -r -i 's#^OnAccessMountPath (.*)$#OnAccessMountPath /#m' /etc/clamav/clamd.conf
+  else
+    echo 'OnAccessMountPath /' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+  fi
+
+  if grep -R "^OnAccessPrevention " "/etc/clamav/clamd.conf"; then
+    sudo sed -r -i 's/^OnAccessPrevention (.*)$/OnAccessPrevention false/m' /etc/clamav/clamd.conf
+  else
+    echo 'OnAccessPrevention false' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+  fi
+
+  if grep -R "^OnAccessExtraScanning " "/etc/clamav/clamd.conf"; then
+    sudo sed -r -i 's/^OnAccessExtraScanning (.*)$/OnAccessExtraScanning true/m' /etc/clamav/clamd.conf
+  else
+    echo 'OnAccessExtraScanning true' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+  fi
+
+  if grep -R "^OnAccessExcludeUID " "/etc/clamav/clamd.conf"; then
+    sudo sed -r -i 's/^OnAccessExcludeUID (.*)$/OnAccessExcludeUID 0/m' /etc/clamav/clamd.conf
+  else
+    echo 'OnAccessExcludeUID 0' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+  fi
+
+  if grep -R "^User " "/etc/clamav/clamd.conf"; then
+    sudo sed -r -i 's/^User (.*)$/User root/m' /etc/clamav/clamd.conf
+  else
+    echo 'User root' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+  fi
+
+  sudo apt -y install apparmor-utils &>/dev/null
+  sudo aa-complain clamd &>/dev/null
+
 
   if [ $(hasPackage "bleachbit") = "false" ] ; then
     sudo apt -y install bleachbit &>/dev/null
