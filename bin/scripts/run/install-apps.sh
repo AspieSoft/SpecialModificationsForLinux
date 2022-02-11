@@ -47,8 +47,8 @@ if [ "$installNemo" = true ] ; then
     fi
 
     xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
-    gsettings set org.gnome.desktop.background show-desktop-icons false
-    gsettings set org.nemo.desktop show-desktop-icons true
+    # gsettings set org.gnome.desktop.background show-desktop-icons false
+    # gsettings set org.nemo.desktop show-desktop-icons true
 
     endLoading "$loading"
   ) &
@@ -106,13 +106,15 @@ if [ $(hasPackage "dconf-editor") = "false" ] ; then
 fi
 
 
-if [ $(hasPackage "gnome-tweak-tool") = "false" ] ; then
-  loading=$(startLoading "Installing Gnome Tweak Tool")
-  (
-    sudo apt -y install gnome-tweak-tool &>/dev/null
-    endLoading "$loading"
-  ) &
-  runLoading "$loading"
+if echo $XDG_CURRENT_DESKTOP | grep GNOME ; then
+  if [ $(hasPackage "gnome-tweak-tool") = "false" ] ; then
+    loading=$(startLoading "Installing Gnome Tweak Tool")
+    (
+      sudo apt -y install gnome-tweak-tool &>/dev/null
+      endLoading "$loading"
+    ) &
+    runLoading "$loading"
+  fi
 fi
 
 
