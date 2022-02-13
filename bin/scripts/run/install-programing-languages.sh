@@ -23,13 +23,21 @@ loading=$(startLoading "Installing Java")
   fi
 
   if [ "$installOracleJava" = true ] ; then
-    if [ $(hasPackage "oracle-java16-installer") = "false" ] ; then
+    if [ $(hasPackage "oracle-java17-installer") = "false" ] ; then
       sudo add-apt-repository -y ppa:linuxuprising/java &>/dev/null
       sudo apt update &>/dev/null
 
-      sudo echo oracle-java16-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+      sudo echo oracle-java17-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 
-      sudo apt -y install oracle-java16-installer --install-recommends &>/dev/null
+      sudo echo oracle-java17-installer shared/accepted-oracle-license-v1-2 select true | sudo /usr/bin/debconf-set-selections
+
+      sudo echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+      sudo echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+
+      sudo echo debconf shared/accepted-oracle-license-v1-2 select true | sudo debconf-set-selections
+      sudo echo debconf shared/accepted-oracle-license-v1-2 seen true | sudo debconf-set-selections
+
+      sudo apt -y install oracle-java17-installer --install-recommends &>/dev/null
     fi
   else
     if [ $(hasPackage "openjdk-11-jre") = "false" ] ; then

@@ -3,7 +3,7 @@
 source ./bin/scripts/functions/common.sh
 
 function pLang_getOpts() {
-  local installOracleJava=$(ynInput "Would you like to Install Oracle Java 16" "y")
+  local installOracleJava=$(ynInput "Would you like to Install Oracle Java 17" "y")
 
   echo "$installOracleJava"
 
