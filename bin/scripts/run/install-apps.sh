@@ -263,7 +263,7 @@ if [ $(hasPackage "steam") = "false" ] ; then
   loading=$(startLoading "Installing Steam")
   (
     sudo apt -y install steam &>/dev/null
-    
+
     if ! [ ! -z $(grep "Steam" "$HOME/.hidden") ] ; then
       echo 'Steam' | sudo tee -a $HOME/.hidden &>/dev/null
     fi
