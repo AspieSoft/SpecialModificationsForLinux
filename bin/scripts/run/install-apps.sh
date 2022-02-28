@@ -193,14 +193,13 @@ if [ $(hasPackage "obs-studio") = "false" ] ; then
 fi
 
 
-#todo: fix dpkg-query package not found (probobly caused by snap or --classic)
 if [ $(hasPackage "atom") = "false" ] ; then
   loading=$(startLoading "Installing Atom Text Editor")
   (
     sudo snap install --classic atom &>/dev/null
 
-    sudo mkdir -p ./bin/apps/atom &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* ~/.atom &>/dev/null
+    sudo mkdir -p $HOME/atom &>/dev/null
+    sudo cp -R -f ./bin/apps/atom/* $HOME/.atom &>/dev/null
 
     # for new users
     sudo mkdir -p /etc/skel/.atom &>/dev/null
@@ -264,6 +263,16 @@ if [ $(hasPackage "steam") = "false" ] ; then
   loading=$(startLoading "Installing Steam")
   (
     sudo apt -y install steam &>/dev/null
+    
+    if ! [ ! -z $(grep "Steam" "$HOME/.hidden") ] ; then
+      echo 'Steam' | sudo tee -a $HOME/.hidden &>/dev/null
+    fi
+
+    # for new users
+    if ! [ ! -z $(grep "Steam" "/etc/skel/.hidden") ] ; then
+      echo 'Steam' | sudo tee -a /etc/skel/.hidden &>/dev/null
+    fi
+
     endLoading "$loading"
   ) &
   runLoading "$loading"

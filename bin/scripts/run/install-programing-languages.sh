@@ -12,6 +12,31 @@ trap cleanup EXIT
 installOracleJava="$1"
 
 
+# hide basic folders
+loading=$(startLoading "Hiding 'core' and 'snap' Folders")
+(
+  if ! [ ! -z $(grep "core" "$HOME/.hidden") ] ; then
+    echo 'core' | sudo tee -a $HOME/.hidden &>/dev/null
+  fi
+
+  if ! [ ! -z $(grep "snap" "$HOME/.hidden") ] ; then
+    echo 'snap' | sudo tee -a $HOME/.hidden &>/dev/null
+  fi
+
+  # for new users
+  if ! [ ! -z $(grep "core" "/etc/skel/.hidden") ] ; then
+    echo 'core' | sudo tee -a /etc/skel/.hidden &>/dev/null
+  fi
+
+  if ! [ ! -z $(grep "snap" "/etc/skel/.hidden") ] ; then
+    echo 'snap' | sudo tee -a /etc/skel/.hidden &>/dev/null
+  fi
+
+  endLoading "$loading"
+) &
+runLoading "$loading"
+
+
 # install java
 loading=$(startLoading "Installing Java")
 (
@@ -129,5 +154,27 @@ loading=$(startLoading "Installing GIT")
   endLoading "$loading"
 ) &
 runLoading "$loading"
+
+
+# install go
+loading=$(startLoading "Go Go Gaget Install Golang")
+(
+  if [ $(hasPackage "golang-go") = "false" ] ; then
+    sudo apt -y install golang-go &>/dev/null
+  fi
+
+  if ! [ ! -z $(grep "go" "$HOME/.hidden") ] ; then
+    echo 'go' | sudo tee -a $HOME/.hidden &>/dev/null
+  fi
+
+  # for new users
+  if ! [ ! -z $(grep "go" "/etc/skel/.hidden") ] ; then
+    echo 'go' | sudo tee -a /etc/skel/.hidden &>/dev/null
+  fi
+
+  endLoading "$loading"
+) &
+runLoading "$loading"
+
 
 unset loading
