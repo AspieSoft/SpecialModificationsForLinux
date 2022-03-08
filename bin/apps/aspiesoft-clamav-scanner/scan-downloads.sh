@@ -28,7 +28,7 @@ inotifywait -q -m -r -e close_write --format '%w%f' "$DIR" | while read FILE ; d
   if [ -s "$FILE" ] ; then
     (
       sleep 1
-      if [ -s "$FILE" ] ; then
+      if [ -s "$FILE" ] && ! [[ "$FILE" =~ .*\.crdownload$ ]] ; then
         while [ $scanCount -ge $SCAN_LIMIT ] ; do
           sleep 1
         done
