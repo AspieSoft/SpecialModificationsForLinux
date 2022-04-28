@@ -30,6 +30,7 @@ echo "$FILE" >> $scanList
 
     if [ -f "$FILE" ] || [ -d "$FILE" ] ; then
       notify-send -i "/etc/aspiesoft-clamav-scanner/icon-green.png" -t 3 "File Is Safe" "$fileName"
+      # xdg-open $HOME/Downloads
     else
       notify-send -i "/etc/aspiesoft-clamav-scanner/icon-red.png" -t 3 "Warning: File Moved To Quarantine" "$fileName"
     fi
