@@ -44,3 +44,20 @@ function apt() {
 alias snapi='sudo snap -y install'
 alias snaprm='sudo snap remove'
 alias snapu='sudo snap refresh'
+
+
+# search
+alias chrome="google-chrome"
+
+function search() {
+  s="$@"
+  s=${s// /+}
+
+  if [[ "$s" == "" ]]; then
+    google-chrome
+  else
+    google-chrome "https://www.google.com/search?q=$s"
+  fi
+
+  unset s
+}
