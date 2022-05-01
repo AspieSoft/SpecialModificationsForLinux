@@ -48,6 +48,7 @@ alias snapu='sudo snap refresh'
 
 # search
 alias chrome="google-chrome"
+alias google="google-chrome"
 
 function search() {
   s="$@"
@@ -55,6 +56,8 @@ function search() {
 
   if [[ "$s" == "" ]]; then
     google-chrome
+  elif [[ "$s" == *"."* ]]; then
+    google-chrome "$s"
   else
     google-chrome "https://www.google.com/search?q=$s"
   fi
