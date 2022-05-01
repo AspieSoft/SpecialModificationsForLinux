@@ -54,13 +54,19 @@ function search() {
   s="$@"
   s=${s// /+}
 
+  b=$(xdg-settings get default-web-browser)
+  b=${b//\.desktop/}
+
   if [[ "$s" == "" ]]; then
-    google-chrome
-  elif [[ "$s" == *"."* ]]; then
-    google-chrome "$s"
+    $b
+  elif [[ "$s" == *"+"* ]]; then
+    $b "https://www.google.com/search?q=$s"
+  elif [[ "$s" == *"."* ]] || [[ "$s" == *"/"* ]]; then
+    $b "$s"
   else
-    google-chrome "https://www.google.com/search?q=$s"
+    $b "https://www.google.com/search?q=$s"
   fi
 
   unset s
+  unset b
 }
