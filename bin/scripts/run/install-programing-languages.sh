@@ -98,7 +98,7 @@ runLoading "$loading"
 loading=$(startLoading "Installing Node.js")
 (
   sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates &>/dev/null
-  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - &>/dev/null
+  curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - &>/dev/null
 
   if [ $(hasPackage "nodejs") = "false" ] ; then
     sudo apt -y install nodejs &>/dev/null
