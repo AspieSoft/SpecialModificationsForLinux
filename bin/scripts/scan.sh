@@ -31,6 +31,10 @@ trap cleanup EXIT
 tput civis
 
 
+loadingLine="|"
+# loadingLine="🕛"
+
+
 while true ; do
 
   scanLoopTimeout=$(($scanLoopTimeout-1))
@@ -40,12 +44,49 @@ while true ; do
     break
   fi
 
+  if [ "$loadingLine" = "|" ]; then
+    loadingLine="/"
+  elif [ "$loadingLine" = "/" ]; then
+    loadingLine="-"
+  elif [ "$loadingLine" = "-" ]; then
+    loadingLine="\\"
+  elif [ "$loadingLine" = "\\" ]; then
+    loadingLine="|"
+  fi
+
+  # if [ "$loadingLine" = "🕛" ]; then
+  #   loadingLine="🕐"
+  # elif [ "$loadingLine" = "🕐" ]; then
+  #   loadingLine="🕑"
+  # elif [ "$loadingLine" = "🕑" ]; then
+  #   loadingLine="🕒"
+  # elif [ "$loadingLine" = "🕒" ]; then
+  #   loadingLine="🕓"
+  # elif [ "$loadingLine" = "🕓" ]; then
+  #   loadingLine="🕔"
+  # elif [ "$loadingLine" = "🕔" ]; then
+  #   loadingLine="🕕"
+  # elif [ "$loadingLine" = "🕕" ]; then
+  #   loadingLine="🕖"
+  # elif [ "$loadingLine" = "🕖" ]; then
+  #   loadingLine="🕗"
+  # elif [ "$loadingLine" = "🕗" ]; then
+  #   loadingLine="🕘"
+  # elif [ "$loadingLine" = "🕘" ]; then
+  #   loadingLine="🕙"
+  # elif [ "$loadingLine" = "🕙" ]; then
+  #   loadingLine="🕚"
+  # elif [ "$loadingLine" = "🕚" ]; then
+  #   loadingLine="🕛"
+  # fi
+
   doneScan=$(cat $scanFinished)
   fileCount=$(cat $tempFileCount)
 
   if [ "$doneScan" = "true" ] ; then
     if ! [ "$fileCount" = "false" ] ; then
-      printf "\rProgress : [#########################] 100%%     "
+      # printf "\rProgress : [#########################] 100%%     "
+      printf "\rProgress $loadingLine [#########################] 100%%     "
     fi
     break
   fi
@@ -73,7 +114,8 @@ while true ; do
   scanCount=$(wc -l < scan.log)
 
   if [ "$scanCount" -gt "$fileCount" ] ; then
-    printf "\rProgress : [#########################] 100%%     "
+    # printf "\rProgress : [#########################] 100%%     "
+    printf "\rProgress $loadingLine [#########################] 100%%     "
     break
   fi
 
@@ -84,7 +126,8 @@ while true ; do
 
   scanP100=$(($scanCount * 100 / $fileCount))
 
-  printf "\rProgress : [${scanPFill// /#}${scanPEmpt// /-}] ${scanP100}%%     "
+  # printf "\rProgress : [${scanPFill// /#}${scanPEmpt// /-}] ${scanP100}%%     "
+  printf "\rProgress $loadingLine [${scanPFill// /#}${scanPEmpt// /-}] ${scanP100}%%     "
 
   sleep 1
 done

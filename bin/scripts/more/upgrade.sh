@@ -19,7 +19,7 @@ function upgrade_run() {
 
 
 function upgrade_run_basic() {
-  local grubTimeout=$(numberInput "What do you want to set the grub time to" "5" "1" "30" "Seconds")
+  local grubTimeout=$(numberInput "What do you want to set the grub time to" "5" "0" "30" "Seconds")
 
   local opts=$(upgrade_getOpts)
   runUpdate "true"
