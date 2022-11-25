@@ -1,5 +1,7 @@
 # Special Modifications for Linux
 
+[![donation link](https://img.shields.io/badge/buy%20me%20a%20coffee-paypal-blue)](https://paypal.me/shaynejrtaylor?country.x=US&locale.x=en_US)
+
 Whether Your new to linux, or just distro hopping, this bash script can make the setup process a bit easier.
 
 This script will set up your distro form enabling the firewall, to adding performance upgrades you would generally find on YouTube. It also fixes a variety of potential issues, and will make sure you have some common apps installed such as gparted.
