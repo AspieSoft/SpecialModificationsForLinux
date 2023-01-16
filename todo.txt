@@ -5,3 +5,4 @@ This is just some ideas I jotted down so I don't forget.
 find a way to run google playstore apps on linux
 
 fix java (and ubuntu extras) install prompts possibly causing issues with installing
+

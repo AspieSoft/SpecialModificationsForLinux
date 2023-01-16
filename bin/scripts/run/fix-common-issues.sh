@@ -66,6 +66,21 @@ loading=$(startLoading "Installing hplip-gui for printer")
 runLoading "$loading"
 
 
+loading=$(startLoading "Reducing system freezing chance with high memory usage")
+(
+  sudo cp ./bin/apps/set-ram-limit.sh /etc/init.d/set-ram-limit
+  sudo chmod +x /etc/init.d/set-ram-limit
+
+  sudo update-rc.d set-ram-limit defaults
+  sudo service set-ram-limit start
+
+  bash ./bin/apps/set-ram-limit.sh
+
+  endLoading "$loading"
+) &
+runLoading "$loading"
+
+
 loading=$(startLoading "Fixing other issues")
 (
   # hide snap folder

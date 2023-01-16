@@ -127,8 +127,18 @@ loading=$(startLoading "Installing NPM")
   fi
 
   npm config set prefix ~/.npm
-  echo 'export N_PREFIX="$HOME/.npm"' >> ~/.zshrc
-  echo 'export N_PREFIX="$HOME/.npm"' >> ~/.profile
+
+  hasExport=$(sudo grep "export N_PREFIX=\"$HOME/.npm\"" "$HOME/.zshrc")
+  if [[ "$hasExport" == "" ]]; then
+    echo 'export N_PREFIX="$HOME/.npm"' >> ~/.zshrc
+  fi
+
+  hasExport=$(sudo grep "export N_PREFIX=\"$HOME/.npm\"" "$HOME/.profile")
+  if [[ "$hasExport" == "" ]]; then
+    echo 'export N_PREFIX="$HOME/.npm"' >> ~/.profile
+  fi
+
+  unset hasExport
 
   sudo npm install -g npm &>/dev/null
 
@@ -167,18 +177,28 @@ runLoading "$loading"
 # install go
 loading=$(startLoading "Go Go Gaget Install Golang")
 (
-  if [ $(hasPackage "golang-go") = "false" ] ; then
-    sudo apt -y install golang-go &>/dev/null
+  goVersion=$(curl -sL https://golang.org/VERSION?m=text)
+  wget -L "https://dl.google.com/go/${goVersion}.linux-amd64.tar.gz"
+
+  goSum=$(curl -sL https://golang.org/dl/ | grep -A 5 -w "${goVersion}.linux-amd64.tar.gz" | grep "<td><tt>")
+  goSum=$(echo "$goSum" | sed -e 's/^.*<td><tt>//' -e 's#</tt></td>.*$##' -e 's/[^A-Za-z0-9]//')
+  goSum=$(echo "$goSum *${goVersion}.linux-amd64.tar.gz" | shasum -a 256 --check | grep "${goVersion}.linux-amd64.tar.gz: OK")
+
+  if [[ "$goSum" != "" ]]; then
+    sudo rm -rf /usr/share/go
+    sudo tar -C /usr/share -xzf "${goVersion}.linux-amd64.tar.gz"
+
+    hasExport=$(sudo grep "export GOROOT=" "$HOME/.bashrc")
+    if [[ "$hasExport" == "" ]]; then
+      echo -e '\nexport GOROOT=/usr/share/go\nexport GOPATH=$HOME/go\nexport PATH=$GOPATH/bin:$GOROOT/bin:$PATH\n' | sudo tee -a "$HOME/.bashrc" &>/dev/null
+    fi
+    unset hasExport
   fi
 
-  if ! [ ! -z $(grep "go" "$HOME/.hidden") ] ; then
-    echo 'go' | sudo tee -a $HOME/.hidden &>/dev/null
-  fi
+  sudo rm -rf "${goVersion}.linux-amd64.tar.gz"
 
-  # for new users
-  if ! [ ! -z $(grep "go" "/etc/skel/.hidden") ] ; then
-    echo 'go' | sudo tee -a /etc/skel/.hidden &>/dev/null
-  fi
+  unset goVersion
+  unset goSum
 
   endLoading "$loading"
 ) &

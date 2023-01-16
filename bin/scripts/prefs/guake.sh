@@ -13,3 +13,5 @@ gsettings set guake.style.background transparency 85
 if [ "$keybind" = "true" ] ; then
   gsettings set guake.keybindings.global show-hide 'Menu'
 fi
+
+# xmodmap -e "keycode 105=Menu"

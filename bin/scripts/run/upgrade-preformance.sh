@@ -75,26 +75,6 @@ loading=$(startLoading "Disabling time wasting startup programs")
     sudo systemctl disable whoopsie.service &>/dev/null # ubuntu error reporting
   fi
 
-  # todo: see if "cups.service" can be delayed
-  # todo: see if "snapd.service" can be delayed (takes 2 seconds at boot)
-  # todo: see if "plymouth-quit-wait.service" can be delayed or disabled (takes 7 seconds at boot)
-  # todo: see if "dev-sdc3.device" can be delayed or disabled (takes 12 seconds at boot)
-
-  endLoading "$loading"
-) &
-runLoading "$loading"
-
-
-loading=$(startLoading "Improving multitasking preformance")
-(
-  sudo cp ./bin/apps/set-ram-limit.sh /etc/init.d/set-ram-limit
-  sudo chmod +x /etc/init.d/set-ram-limit
-
-  sudo update-rc.d set-ram-limit defaults
-  sudo service set-ram-limit start
-
-  bash ./bin/apps/set-ram-limit.sh
-
   endLoading "$loading"
 ) &
 runLoading "$loading"
