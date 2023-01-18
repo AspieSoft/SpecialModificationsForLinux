@@ -128,14 +128,24 @@ loading=$(startLoading "Installing NPM")
 
   npm config set prefix ~/.npm
 
-  hasExport=$(sudo grep "export N_PREFIX=\"$HOME/.npm\"" "$HOME/.zshrc")
+  hasExport=$(sudo grep 'export N_PREFIX="$HOME/.npm"' "$HOME/.zshrc")
   if [[ "$hasExport" == "" ]]; then
-    echo 'export N_PREFIX="$HOME/.npm"' >> ~/.zshrc
+    echo 'export N_PREFIX="$HOME/.npm"' | sudo tee -a "$HOME/.zshrc" &>/dev/null
   fi
 
-  hasExport=$(sudo grep "export N_PREFIX=\"$HOME/.npm\"" "$HOME/.profile")
+  hasExport=$(sudo grep 'export N_PREFIX="$HOME/.npm"' "$HOME/.profile")
   if [[ "$hasExport" == "" ]]; then
-    echo 'export N_PREFIX="$HOME/.npm"' >> ~/.profile
+    echo 'export N_PREFIX="$HOME/.npm"' | sudo tee -a "$HOME/.profile" &>/dev/null
+  fi
+
+  hasExport=$(sudo grep 'export N_PREFIX="$HOME/.npm"' "/etc/skel/.zshrc")
+  if [[ "$hasExport" == "" ]]; then
+    echo 'export N_PREFIX="$HOME/.npm"' | sudo tee -a "/etc/skel/.zshrc" &>/dev/null
+  fi
+
+  hasExport=$(sudo grep 'export N_PREFIX="$HOME/.npm"' "/etc/skel/.profile")
+  if [[ "$hasExport" == "" ]]; then
+    echo 'export N_PREFIX="$HOME/.npm"' | sudo tee -a "/etc/skel/.profile" &>/dev/null
   fi
 
   unset hasExport
@@ -192,6 +202,12 @@ loading=$(startLoading "Go Go Gaget Install Golang")
     if [[ "$hasExport" == "" ]]; then
       echo -e '\nexport GOROOT=/usr/share/go\nexport GOPATH=$HOME/go\nexport PATH=$GOPATH/bin:$GOROOT/bin:$PATH\n' | sudo tee -a "$HOME/.bashrc" &>/dev/null
     fi
+
+    hasExport=$(sudo grep "export GOROOT=" "/etc/skel/.bashrc")
+    if [[ "$hasExport" == "" ]]; then
+      echo -e '\nexport GOROOT=/usr/share/go\nexport GOPATH=$HOME/go\nexport PATH=$GOPATH/bin:$GOROOT/bin:$PATH\n' | sudo tee -a /etc/skel/.bashrc &>/dev/null
+    fi
+
     unset hasExport
   fi
 
