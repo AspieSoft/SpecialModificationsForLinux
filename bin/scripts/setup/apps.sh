@@ -45,9 +45,14 @@ if [ "$installNemo" = true ] ; then
       sudo apt -y install nemo &>/dev/null
     fi
 
-    xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+    xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search &>/dev/null
     # gsettings set org.gnome.desktop.background show-desktop-icons false
     # gsettings set org.nemo.desktop show-desktop-icons true
+
+    # force nemo over default
+    #note: may make Nautilus inaccessible (https://askubuntu.com/a/260249)
+    # sudo mv /usr/bin/nautilus /usr/bin/nautilus.back && sudo ln -s /usr/bin/nemo /usr/bin/nautilus &>/dev/null
+    # sudo mv /usr/bin/thunar /usr/bin/thunar.back && sudo ln -s /usr/bin/nemo /usr/bin/thunar &>/dev/null
 
     endLoading "$loading"
   ) &
