@@ -115,11 +115,11 @@ if echo $XDG_CURRENT_DESKTOP | grep GNOME &>/dev/null ; then
     runLoading "$loading"
   fi
 
-  # gnome-shell-extensions-manager
-  if [ $(hasPackage "gnome-shell-extensions-manager") = "false" ] ; then
+  # gnome-shell-extension-manager
+  if [ $(hasPackage "gnome-shell-extension-manager") = "false" ] ; then
     loading=$(startLoading "Installing Gnome Tweak Tool")
     (
-      sudo apt -y install gnome-shell-extensions-manager &>/dev/null
+      sudo apt -y install gnome-shell-extension-manager &>/dev/null
       endLoading "$loading"
     ) &
     runLoading "$loading"
