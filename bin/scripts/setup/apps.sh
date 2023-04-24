@@ -103,12 +103,23 @@ if [ $(hasPackage "dconf-editor") = "false" ] ; then
 fi
 
 
-# gnome-tweak-tool
+# gnome tools
 if echo $XDG_CURRENT_DESKTOP | grep GNOME &>/dev/null ; then
+  # gnome-tweak-tool
   if [ $(hasPackage "gnome-tweak-tool") = "false" ] ; then
     loading=$(startLoading "Installing Gnome Tweak Tool")
     (
       sudo apt -y install gnome-tweak-tool &>/dev/null
+      endLoading "$loading"
+    ) &
+    runLoading "$loading"
+  fi
+
+  # gnome-shell-extensions-manager
+  if [ $(hasPackage "gnome-shell-extensions-manager") = "false" ] ; then
+    loading=$(startLoading "Installing Gnome Tweak Tool")
+    (
+      sudo apt -y install gnome-shell-extensions-manager &>/dev/null
       endLoading "$loading"
     ) &
     runLoading "$loading"
