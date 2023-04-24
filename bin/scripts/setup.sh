@@ -1,29 +1,71 @@
 #!/bin/bash
 
-source ./bin/scripts/functions/common.sh
+source ./bin/common/functions.sh
 
-source ./bin/scripts/more/shortcuts.sh
-source ./bin/scripts/fix.sh
-source ./bin/scripts/more/upgrade.sh
-source ./bin/scripts/more/apps.sh
-source ./bin/scripts/more/p-languages.sh
-source ./bin/scripts/more/security.sh
+function cleanup() {
+  unset loading
+
+  unset grubTimeout
+
+  unset grubBadRam
+  unset disableUbuntuErrorReporting
+
+  unset installNemo
+  unset installWine
+  unset installIce
+  unset installKeyboardCursor
+  unset installRecommended
+
+  #unset installExtras
+  unset installOracleJava
+
+  unset runScan
+
+  # reset login timeout
+  sudo sed -r -i 's/^Defaults([\t ]+)(.*)env_reset(.*), (timestamp_timeout=1801,?\s*)+$/Defaults\1\2env_reset\3/m' /etc/sudoers &>/dev/null
+
+  # enable sleep
+  sudo systemctl --runtime unmask sleep.target suspend.target hibernate.target hybrid-sleep.target &>/dev/null
+
+  # enable auto updates
+  sudo sed -r -i 's/^APT::Periodic::Update-Package-Lists "([0-9]+)";$/APT::Periodic::Update-Package-Lists "1";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
+  sudo sed -r -i 's/^APT::Periodic::Unattended-Upgrade "([0-9]+)";$/APT::Periodic::Unattended-Upgrade "1";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
+}
+trap cleanup EXIT
 
 
 # To log into sudo with password prompt
 sudo echo
 
-# Get user input for GRUB_TIMEOUT (not making them wait for the script to get half way through)
+# extend login timeout
+sudo sed -r -i 's/^Defaults([\t ]+)(.*)env_reset(.*)$/Defaults\1\2env_reset\3, timestamp_timeout=1801/m' /etc/sudoers &>/dev/null
+
+# disable sleep
+sudo systemctl --runtime mask sleep.target suspend.target hibernate.target hybrid-sleep.target &>/dev/null
+
+# disable auto updates
+sudo sed -r -i 's/^APT::Periodic::Update-Package-Lists "([0-9]+)";$/APT::Periodic::Update-Package-Lists "0";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
+sudo sed -r -i 's/^APT::Periodic::Unattended-Upgrade "([0-9]+)";$/APT::Periodic::Unattended-Upgrade "0";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
+
+
+# Get user inputs
 grubTimeout=$(numberInput "What do you want to set the grub time to" "5" "0" "30" "Seconds")
 
-shortcutOpts=$(shortcuts_getOpts)
-fixOpts=$(fix_getOpts)
-upgradeOpts=$(upgrade_getOpts)
-appOpts=$(apps_getOpts)
-pLangOpts=$(pLang_getOpts)
+grubBadRam=$(ynInput "Would you like to Enable BadRAM Filtering" "y")
+disableUbuntuErrorReporting=$(ynInput "Would you like to Disable Ubuntu Error Reporting" "y")
+
+installNemo=$(ynInput "Would you like to Install The Nemo File Manager" "y")
+installWine=$(ynInput "Would you like to Install WINE" "y")
+installIce=$(ynInput "Would you like to Install ICE" "y")
+installKeyboardCursor=$(ynInput "Would you like to Install Aspiesoft Keyboard Cursor [CapsLock to enable, arrow keys to move mouse]" "n")
+installRecommended=$(ynInput "Would you like to Install Other Recommended Apps" "y")
+
+#installExtras=$(ynInput "Would you like to Install Ubuntu Restricted Extras" "y")
+installOracleJava=$(ynInput "Would you like to Install Oracle Java 17" "y")
 
 runScan=$(ynInput "Would you like to run a ClamAV Virus Scan afterwards" "n")
 
+echo
 
 # enable firewall
 loading=$(startLoading "Enabling Firewall")
@@ -32,7 +74,6 @@ loading=$(startLoading "Enabling Firewall")
   endLoading "$loading"
 ) &
 runLoading "$loading"
-
 
 loading=$(startLoading "Fixing Common Apt Issues")
 (
@@ -44,90 +85,45 @@ loading=$(startLoading "Fixing Common Apt Issues")
 ) &
 runLoading "$loading"
 
-
 # update
 runUpdate "true"
 
-
-# install programing languages
-pLang_run "$pLangOpts"
-
+#bash ./bin/scripts/setup/programing-languages.sh "$installExtras" "$installOracleJava"
+bash ./bin/scripts/setup/programing-languages.sh "$installOracleJava"
 
 # update
 runUpdate
 
-
-# upgrade preformance
-upgrade_run "$grubTimeout $upgradeOpts"
+bash ./bin/scripts/setup/preformance.sh "$grubTimeout" "$grubBadRam" "$disableUbuntuErrorReporting"
 
 # fix common issues
-fix_run "$fixOpts" "true"
-
+bash ./bin/scripts/fix.sh "true"
 
 # update
 runUpdate
-
 
 # install security
-security_run
+bash ./bin/scripts/setup/security.sh
 
 # install apps
-apps_run "$appOpts"
-
+bash ./bin/scripts/setup/apps.sh "$installNemo" "$installWine" "$installIce" "$installKeyboardCursor" "$installRecommended"
 
 # update
 runUpdate
 
-
-# add shortcuts
-shortcuts_run "$shortcutOpts"
-
+# install terminal shortcuts
+bash ./bin/scripts/setup/shortcuts.sh
 
 # update
 runUpdate "true"
 
-
-# clean ubuntu
-loading=$(startLoading "Cleaning Up")
-(
-  sudo apt -y clean &>/dev/null
-  sudo apt -y autoremove &>/dev/null
-  sudo apt update &>/dev/null
-
-  # unset variables
-  unset grubTimeout
-
-  unset shortcutOpts
-  unset fixOpts
-  unset upgradeOpts
-  unset appOpts
-  unset pLangOpts
-
-  unset -f shortcuts_getOpts
-  unset -f shortcuts_run
-  unset -f fix_getOpts
-  unset -f fix_run
-  unset -f upgrade_getOpts
-  unset -f upgrade_run
-  unset -f apps_getOpts
-  unset -f apps_run
-  unset -f pLang_getOpts
-  unset -f pLang_run
-
-  endLoading "$loading"
-) &
-runLoading "$loading"
-unset loading
-
-echo -e "Done!\n"
-
+sudo apt-get -y autoremove &>/dev/null
 
 # run virus scan
 if [ "$runScan" = "true" ] ; then
-  unset runScan
-  bash ./bin/scripts/scan.sh "/"
+  bash ./bin/scripts/virus-scan.sh "/"
 
   runUpdate
-else
-  unset runScan
+
+  sudo apt-get -y autoremove &>/dev/null
 fi
