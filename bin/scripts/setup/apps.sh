@@ -124,7 +124,8 @@ if echo $XDG_CURRENT_DESKTOP | grep GNOME &>/dev/null ; then
   if [ $(hasPackage "gnome-shell-extension-manager") = "false" ] ; then
     loading=$(startLoading "Installing Gnome Tweak Tool")
     (
-      sudo apt -y install gnome-shell-extension-manager &>/dev/null
+      # sudo apt -y install gnome-shell-extension-manager &>/dev/null
+      sudo flatpak install -y flathub com.mattjakeman.ExtensionManager &>/dev/null
       endLoading "$loading"
     ) &
     runLoading "$loading"
