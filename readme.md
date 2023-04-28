@@ -10,6 +10,10 @@ This bash script is built and tested with ubuntu.
 
 Personally, I mostly use ZorinOS, so it may be slightly more optimized for zorin, but should work fine on any ubuntu based distro.
 
+## Whats New
+
+- Added fedora support
+
 ## Hou To Use
 
 1. Download and Extract the SpecialModifications.tar.gz
