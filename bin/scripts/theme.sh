@@ -12,4 +12,4 @@ gsettings set org.gnome.desktop.interface gtk-theme "Fluent-round-Dark"
 gsettings set org.gnome.desktop.interface icon-theme "ZorinBlue-Dark"
 gsettings set org.gnome.desktop.sound theme-name "zorin"
 
-# add gnome extentions
+#todo: add gnome extentions
