@@ -22,16 +22,30 @@ function endLoading() {
 }
 
 function runUpdate() {
-  local loading=$(startLoading "Updating")
-  (
-    sudo apt update &>/dev/null
-    if [ "$1" = "true" ] ; then
-      sudo apt upgrade -y &>/dev/null
-    fi
-    endLoading "$loading"
-  ) &
-  runLoading "$loading"
-  unset loading
+  if [ "$package_manager" = "apt" ]; then
+    local loading=$(startLoading "Updating")
+    (
+      sudo apt update &>/dev/null
+      if [ "$1" = "true" ] ; then
+        sudo apt upgrade -y &>/dev/null
+      fi
+      endLoading "$loading"
+    ) &
+    runLoading "$loading"
+    unset loading
+  elif [ "$package_manager" = "dnf" ]; then
+    local loading=$(startLoading "Updating")
+    (
+      if [ "$1" = "true" ] ; then
+        sudo dnf -y update &>/dev/null
+      else
+        sudo dnf --assumeno update &>/dev/null
+      fi
+      endLoading "$loading"
+    ) &
+    runLoading "$loading"
+    unset loading
+  fi
 }
 
 function numberInput() {
@@ -118,13 +132,21 @@ function ynInput() {
 }
 
 function hasPackage() {
-  local installed=$(dpkg-query -W --showformat='${Status}\n' $1 2>/dev/null|grep "install ok installed") &>/dev/null
+  if [ "$package_manager" = "apt" ]; then
+    local installed=$(dpkg-query -W --showformat='${Status}\n' $1 2>/dev/null|grep "install ok installed") &>/dev/null
 
-  if [ "$installed" = "" ] ; then
-    echo "false"
-  else
-    echo "true"
+    if [ "$installed" = "" ]; then
+      echo "false"
+    else
+      echo "true"
+    fi
+
+    unset installed
+  elif [ "$package_manager" = "dnf" ]; then
+    if rpm -q "$1"; then
+      echo "false"
+    else
+      echo "true"
+    fi
   fi
-
-  unset installed
 }
