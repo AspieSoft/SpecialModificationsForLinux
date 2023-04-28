@@ -32,13 +32,15 @@ loading=$(startLoading "Adding Repositorys")
   sudo fedora-third-party enable &>/dev/null
   sudo fedora-third-party refresh &>/dev/null
 
+  sudo dnf -y groupupdate core
+
 
   # activate flathub
   sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &>/dev/null
 
 
   # install codecs
-  #sudo dnf install -y --skip-broken @multimedia &>/dev/null
+  sudo dnf install -y --skip-broken @multimedia &>/dev/null
   sudo dnf -y groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin --skip-broken &>/dev/null
   sudo dnf -y groupupdate sound-and-video &>/dev/null
 
@@ -98,6 +100,8 @@ if [ "$installNemo" = true ] ; then
     # sudo mv /usr/bin/nautilus /usr/bin/nautilus.back && sudo ln -s /usr/bin/nemo /usr/bin/nautilus &>/dev/null
     # sudo mv /usr/bin/thunar /usr/bin/thunar.back && sudo ln -s /usr/bin/nemo /usr/bin/thunar &>/dev/null
 
+    sudo sed -r -i "s/^OnlyShowIn=/#OnlyShowIn=/m" /usr/share/applications/nemo.desktop
+
     endLoading "$loading"
   ) &
   runLoading "$loading"
@@ -154,7 +158,13 @@ if echo $XDG_CURRENT_DESKTOP | grep GNOME &>/dev/null ; then
   if [ $(hasPackage "gnome-tweak-tool") = "false" ] ; then
     loading=$(startLoading "Installing Gnome Tweak Tool")
     (
-      sudo dnf -y install gnome-tweak-tool &>/dev/null
+      # may be needed for gnome tweaks
+      # sudo snap install gtk-theme-orchis
+
+      #todo: fix gnome tweaks
+      #sudo dnf -y install gnome-tweak-tool &>/dev/null
+      sudo dnf -y install gnome-tweaks &>/dev/null
+
       endLoading "$loading"
     ) &
     runLoading "$loading"
@@ -164,7 +174,9 @@ if echo $XDG_CURRENT_DESKTOP | grep GNOME &>/dev/null ; then
   if [ $(hasPackage "gnome-shell-extension-manager") = "false" ] ; then
     loading=$(startLoading "Installing Gnome Extension Manager")
     (
+      sudo flatpak install -y flathub org.gnome.Extensions &>/dev/null
       sudo flatpak install -y flathub com.mattjakeman.ExtensionManager &>/dev/null
+
       endLoading "$loading"
     ) &
     runLoading "$loading"
