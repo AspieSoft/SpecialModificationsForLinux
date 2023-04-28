@@ -30,8 +30,4 @@ Personally, I mostly use ZorinOS, so it may be slightly more optimized for zorin
 
 7. After you choose your preferences, the install will do its thing. It may take a while, so feel free to sip some coffee.
 
-8. After the install has finished, because this project is still in beta, if you see any error notifications about a failed update, run the install process again.
-
-9. If you want, you can run the "Setup Preferences" option to configure other common things, like switching the clock to AM/PM format, etc.
-
-If in step 2, "run.sh" fails to run, right click the file, and go to properties, go to the "permissions" tab, and make sure "allow executing file as program" is checked.
+Note: in step 2, if "run.sh" fails to run, right click the file, and go to properties, go to the "permissions" tab, and make sure "allow executing file as program" is checked.
