@@ -34,8 +34,12 @@ gext -F install clipboard-indicator@tudmotu.com
 gext -F install screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com
 gext -F install compiz-alike-magic-lamp-effect@hermes83.github.com
 gext -F install printers@linux-man.org
+gext -F install gestureimprovements@gestures
 # gext -F install workspace-switch-wraparound@theychx.org
 # gext -F install remove-dropdown-arrows@mpdeimos.com
+
+gext -F install mousefollowsfocus@matthes.biz
+gext disable mousefollowsfocus@matthes.biz
 
 gext -F install Vitals@CoreCoding.com
 gext disable Vitals@CoreCoding.com
