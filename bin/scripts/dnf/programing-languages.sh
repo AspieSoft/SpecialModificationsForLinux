@@ -20,6 +20,8 @@ loading=$(startLoading "Installing Python")
   sudo dnf -y install python &>/dev/null
   sudo dnf -y install python3 &>/dev/null
 
+  sudo dnf -y install python-pip &>/dev/null
+
   endLoading "$loading"
 ) &
 runLoading "$loading"

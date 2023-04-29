@@ -294,6 +294,15 @@ if [ $(hasPackage "blender") = "false" ] ; then
 fi
 
 
+if [ $(hasPackage "gimp") = "false" ] ; then
+  loading=$(startLoading "Installing GNU Image Manipulation")
+  (
+    sudo snap install gimp &>/dev/null
+    endLoading "$loading"
+  ) &
+  runLoading "$loading"
+fi
+
 if [ $(hasPackage "pinta") = "false" ] ; then
   loading=$(startLoading "Installing Pinta")
   (

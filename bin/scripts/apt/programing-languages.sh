@@ -31,13 +31,11 @@ sudo apt -y install ubuntu-restricted-extras
 # install python
 loading=$(startLoading "Installing Python")
 (
-  if [ $(hasPackage "python") = "false" ] ; then
-    sudo apt -y install python &>/dev/null
-  fi
+  sudo apt -y install python &>/dev/null
+  sudo apt -y install python3 &>/dev/null
 
-  if [ $(hasPackage "python3") = "false" ] ; then
-    sudo apt -y install python3 &>/dev/null
-  fi
+  sudo apt -y install python-pip
+  sudo apt -y install python3-pip
 
   endLoading "$loading"
 ) &
@@ -47,19 +45,11 @@ runLoading "$loading"
 # install java
 loading=$(startLoading "Installing Java")
 (
-  if [ $(hasPackage "openjdk-8-jre") = "false" ] ; then
-    sudo apt -y install openjdk-8-jre &>/dev/null
-  fi
-  if [ $(hasPackage "openjdk-8-jdk") = "false" ] ; then
-    sudo apt -y install openjdk-8-jdk &>/dev/null
-  fi
+  sudo apt -y install openjdk-8-jre &>/dev/null
+  sudo apt -y install openjdk-8-jdk &>/dev/null
 
-  if [ $(hasPackage "openjdk-11-jre") = "false" ] ; then
-    sudo apt -y install openjdk-11-jre &>/dev/null
-  fi
-  if [ $(hasPackage "openjdk-11-jdk") = "false" ] ; then
-    sudo apt -y install openjdk-11-jdk &>/dev/null
-  fi
+  sudo apt -y install openjdk-11-jre &>/dev/null
+  sudo apt -y install openjdk-11-jdk &>/dev/null
 
   if [ "$installOracleJava" = true ] ; then
     if [ $(hasPackage "oracle-java17-installer") = "false" ] ; then
@@ -91,19 +81,11 @@ loading=$(startLoading "Installing Node.js")
   sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates &>/dev/null
   curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - &>/dev/null
 
-  if [ $(hasPackage "nodejs") = "false" ] ; then
-    sudo apt -y install nodejs &>/dev/null
-  fi
+  sudo apt -y install nodejs &>/dev/null
 
-  if [ $(hasPackage "gcc") = "false" ] ; then
-    sudo apt -y install gcc &>/dev/null
-  fi
-  if [ $(hasPackage "g++") = "false" ] ; then
-    sudo apt -y install g++ &>/dev/null
-  fi
-  if [ $(hasPackage "make") = "false" ] ; then
-    sudo apt -y install make &>/dev/null
-  fi
+  sudo apt -y install gcc &>/dev/null
+  sudo apt -y install g++ &>/dev/null
+  sudo apt -y install make &>/dev/null
 
   endLoading "$loading"
 ) &
@@ -112,9 +94,7 @@ runLoading "$loading"
 # install npm
 loading=$(startLoading "Installing NPM")
 (
-  if [ $(hasPackage "npm") = "false" ] ; then
-    sudo apt -y install npm &>/dev/null
-  fi
+  sudo apt -y install npm &>/dev/null
 
   npm config set prefix ~/.npm
 
@@ -168,9 +148,7 @@ runLoading "$loading"
 # install yarn
 loading=$(startLoading "Installing YARN")
 (
-  if [ $(hasPackage "yarn") = "false" ] ; then
-    sudo apt -y install yarn &>/dev/null
-  fi
+  sudo apt -y install yarn &>/dev/null
 
   endLoading "$loading"
 ) &
@@ -180,9 +158,7 @@ runLoading "$loading"
 # install git
 loading=$(startLoading "Installing GIT")
 (
-  if [ $(hasPackage "git") = "false" ] ; then
-    sudo apt -y install git &>/dev/null
-  fi
+  sudo apt -y install git &>/dev/null
 
   endLoading "$loading"
 ) &
