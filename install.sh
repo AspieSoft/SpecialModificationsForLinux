@@ -34,10 +34,26 @@ elif [ "$package_manager" = "dnf" ]; then
   sudo dnf -y install git &>/dev/null
 fi
 
-git clone -n --depth=1 --filter=tree:0 https://github.com/AspieSoft/SpecialModificationsForLinux.git &>/dev/null
-cd SpecialModificationsForLinux
+rm -rf SpecialModificationsForLinux
 
-git sparse-checkout set --no-cone "/bin/common/" "/bin/scripts/main/" "/bin/scripts/$package_manager/" "/bin/falcon.txt" "/bin/printer-fix.png" "/readme.md" "/LICENSE" "/run.sh" &>/dev/null
+# git clone -n --depth=1 --filter=tree:0 https://github.com/AspieSoft/SpecialModificationsForLinux.git &>/dev/null
+# cd SpecialModificationsForLinux
+# git sparse-checkout set --no-cone "/bin/common/" "/bin/scripts/main/" "/bin/scripts/$package_manager/" "/bin/falcon.txt" "/bin/printer-fix.png" "/readme.md" "/LICENSE" "/run.sh" &>/dev/null
+
+mkdir SpecialModificationsForLinux
+cd SpecialModificationsForLinux
+git init &>/dev/null
+git config core.sparseCheckout true
+git remote add -f origin https://github.com/AspieSoft/SpecialModificationsForLinux.git &>/dev/null
+echo "/bin/common/" >> ".git/info/sparse-checkout" &>/dev/null
+echo "/bin/scripts/main/" >> ".git/info/sparse-checkout" &>/dev/null
+echo "/bin/scripts/$package_manager/" >> ".git/info/sparse-checkout" &>/dev/null
+echo "/bin/falcon.txt" >> ".git/info/sparse-checkout" &>/dev/null
+echo "/bin/printer-fix.png" >> ".git/info/sparse-checkout" &>/dev/null
+echo "/readme.md" >> ".git/info/sparse-checkout" &>/dev/null
+echo "/LICENSE" >> ".git/info/sparse-checkout" &>/dev/null
+echo "/run.sh" >> ".git/info/sparse-checkout" &>/dev/null
+git checkout master &>/dev/null
 
 rm -rf .git
 
