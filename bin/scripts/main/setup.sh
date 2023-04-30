@@ -35,6 +35,9 @@ function cleanup() {
 
   unset runScan
 
+  unset setNewThemesReady
+  unset setAppsReady
+
   # reset login timeout
   sudo sed -r -i 's/^Defaults([\t ]+)(.*)env_reset(.*), (timestamp_timeout=1801,?\s*)+$/Defaults\1\2env_reset\3/m' /etc/sudoers &>/dev/null
 
@@ -208,9 +211,21 @@ bash ./bin/scripts/main/fix.sh "true"
 runUpdate
 
 # wait for apps to finish installing
-while [ "$setAppsReady" != "true" ]; do
-  sleep 1
-done
+if [ "$setAppsReady" = "false" ]; then
+  loading=$(startLoading "Waiting For Apps To Install")
+  (
+    while [ "$setAppsReady" = "false" ]; do
+      if test -d ./bin/apps; then
+        sleep 5
+        break
+      fi
+      sleep 1
+    done
+
+    endLoading "$loading"
+  ) &
+  runLoading "$loading"
+fi
 sleep 1
 
 # install security
@@ -255,9 +270,21 @@ elif [ "$package_manager" = "dnf" ]; then
 
   if [ "$setNewTheme" = "true" ]; then
     # wait for themes to finish installing
-    while [ "$setNewThemesReady" != "true" ]; do
-      sleep 1
-    done
+    if [ "$setNewThemesReady" = "false" ]; then
+      loading=$(startLoading "Waiting For Themes To Install")
+      (
+        while [ "$setNewThemesReady" = "false" ]; do
+          if test -d ./bin/themes; then
+            sleep 5
+            break
+          fi
+          sleep 1
+        done
+
+        endLoading "$loading"
+      ) &
+      runLoading "$loading"
+    fi
     sleep 1
 
     bash ./bin/scripts/$package_manager/theme.sh
