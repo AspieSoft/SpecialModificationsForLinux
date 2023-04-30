@@ -41,7 +41,7 @@ git sparse-checkout set --no-cone "/bin/common/" "/bin/scripts/main/" "/bin/scri
 
 rm -rf .git
 
-if ! sudo grep -q "# AspieSoft SpecialModifications Function" /etc/bash.bashrc ; then
+if ! sudo grep -q "# AspieSoft SpecialModifications Function" "$HOME/.bash_aliases" ; then
   echo "" >> "$HOME/.bash_aliases"
   echo "# AspieSoft SpecialModifications Function" >> "$HOME/.bash_aliases"
   echo "function SpecialModifications() {" >> "$HOME/.bash_aliases"
