@@ -57,19 +57,21 @@ if ! sudo grep -q "# AspieSoft SpecialModifications Function" "$HOME/.bash_alias
   echo "" >> "$HOME/.bash_aliases"
 fi
 
-if ! test -f "$HOME/.bashrc.d" ; then
-  echo "" >> "$HOME/.bashrc.d"
+if ! test -d "$HOME/.bashrc.d" ; then
+  mkdir "$HOME/.bashrc.d"
 fi
 
-if ! sudo grep -q "# AspieSoft SpecialModifications Function" "$HOME/.bashrc.d" ; then
-  echo "" >> "$HOME/.bashrc.d"
-  echo "# AspieSoft SpecialModifications Function" >> "$HOME/.bashrc.d"
-  echo "function SpecialModifications() {" >> "$HOME/.bashrc.d"
-  echo '  cd "$HOME/SpecialModificationsForLinux"' >> "$HOME/.bashrc.d"
-  echo '  bash "$HOME/SpecialModificationsForLinux/run.sh"' >> "$HOME/.bashrc.d"
-  echo "}" >> "$HOME/.bashrc.d"
-  echo "" >> "$HOME/.bashrc.d"
+if ! test -f "$HOME/.bashrc.d/SpecialModifications" ; then
+  echo "" >> "$HOME/.bashrc.d/SpecialModifications"
+  echo "# AspieSoft SpecialModifications Function" >> "$HOME/.bashrc.d/SpecialModifications"
+  echo "function SpecialModifications() {" >> "$HOME/.bashrc.d/SpecialModifications"
+  echo '  cd "$HOME/SpecialModificationsForLinux"' >> "$HOME/.bashrc.d/SpecialModifications"
+  echo '  bash "$HOME/SpecialModificationsForLinux/run.sh"' >> "$HOME/.bashrc.d/SpecialModifications"
+  echo "}" >> "$HOME/.bashrc.d/SpecialModifications"
+  echo "" >> "$HOME/.bashrc.d/SpecialModifications"
 fi
+
+echo "SpecialModificationsForLinux" >> "$HOME/.hidden"
 
 echo
 bash "run.sh"

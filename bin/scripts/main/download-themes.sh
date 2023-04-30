@@ -15,8 +15,8 @@ cd tmp-download-themes
 
 git clone -n --depth=1 --filter=tree:0 https://github.com/AspieSoft/SpecialModificationsForLinux.git
 cd SpecialModificationsForLinux
-
 git sparse-checkout set --no-cone "/bin/themes/"
+git checkout master &>/dev/null
 
 mv bin/themes ../../bin
 
