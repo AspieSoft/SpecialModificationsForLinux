@@ -45,8 +45,8 @@ if ! sudo grep -q "# AspieSoft SpecialModifications Function" /etc/bash.bashrc ;
   echo "" >> "$HOME/.bash_aliases"
   echo "# AspieSoft SpecialModifications Function" >> "$HOME/.bash_aliases"
   echo "function SpecialModifications() {" >> "$HOME/.bash_aliases"
-  echo '  cd "$HOME/SpecialModifications"' >> "$HOME/.bash_aliases"
-  echo '  bash "$HOME/SpecialModifications/run.sh"' >> "$HOME/.bash_aliases"
+  echo '  cd "$HOME/SpecialModificationsForLinux"' >> "$HOME/.bash_aliases"
+  echo '  bash "$HOME/SpecialModificationsForLinux/run.sh"' >> "$HOME/.bash_aliases"
   echo "}" >> "$HOME/.bash_aliases"
   echo "" >> "$HOME/.bash_aliases"
 fi
