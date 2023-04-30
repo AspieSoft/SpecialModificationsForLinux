@@ -13,6 +13,7 @@ loading=$(startLoading "Installing Security Software")
 (
 
   #todo: lookup different clamav install for fedora https://www.linuxcapable.com/install-clamav-on-fedora-linux/
+  # may be able to reduce cpu usage
 
   sudo dnf -y install clamav clamd clamav-update &>/dev/null
 
