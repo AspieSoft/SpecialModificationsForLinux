@@ -37,6 +37,7 @@ gext -F install gestureimprovements@gestures
 gext -F install just-perfection-desktop@just-perfection
 
 gext -F install another-window-session-manager@gmail.com
+gext disable another-window-session-manager@gmail.com
 
 #todo: find alternative for fedora
 # gext -F install remove-dropdown-arrows@mpdeimos.com
