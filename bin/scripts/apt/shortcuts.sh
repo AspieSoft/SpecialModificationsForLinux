@@ -10,8 +10,7 @@ trap cleanup EXIT
 loading=$(startLoading "Installing AspieSoft Terminal Shortcuts")
 (
   if sudo grep -q "# AspieSoft Added Aliases" /etc/bash.bashrc ; then
-    # todo: fix issue where this is not removed (regex failed)
-    sudo sed -r -i -z "s/# AspieSoft Added Aliases - START\r?\n([\r\n]|.)*?\r?\n# AspieSoft Added Aliases - END//m" /etc/default/grub &>/dev/null
+    sudo sed -r -i -z "s/# AspieSoft Added Aliases - START\r?\n([\r\n]|.)*?\r?\n# AspieSoft Added Aliases - END//m" /etc/bash.bashrc &>/dev/null
   else
     sudo cp /etc/bash.bashrc /etc/bash.bashrc-backup &>/dev/null
   fi
