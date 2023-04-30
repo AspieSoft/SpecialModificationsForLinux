@@ -44,15 +44,15 @@ loading=$(startLoading "Upgrading preformance")
     sudo dnf -y install preload &>/dev/null
   fi
 
-  systemctl start preload &>/dev/null
-  systemctl enable preload &>/dev/null
+  sudo systemctl start preload &>/dev/null
+  sudo systemctl enable preload &>/dev/null
 
   if [ $(hasPackage "tlp-rdw") = "false" ] ; then
     sudo dnf -y install tlp-rdw &>/dev/null
   fi
 
-  systemctl start tlp &>/dev/null
-  systemctl enable tlp &>/dev/null
+  sudo systemctl start tlp &>/dev/null
+  sudo systemctl enable tlp &>/dev/null
   sudo tlp start &>/dev/null
 
   if [ $(hasPackage "thermald") = "false" ] ; then

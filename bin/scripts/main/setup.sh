@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Get package manager type
-if [ "$(which apt)" != "" ]; then
+if [ "$(which apt)" != "" ] &>/dev/null; then
   package_manager="apt"
-elif [ "$(which dnf)" != "" ]; then
+elif [ "$(which dnf)" != "" ] &>/dev/null; then
   package_manager="dnf"
 else
   echo "Error: Package Manager Unsupported"
@@ -121,11 +121,11 @@ gsettings set org.gnome.desktop.interface clock-format 12h &>/dev/null
 
 if [ "$package_manager" = "dnf" ]; then
   # improve dnf preformance
-  echo "# Added for Speed" | sudo tee -a /etc/dnf/dnf.conf
-  echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf
-  echo "max_parallel_downloads=5" | sudo tee -a /etc/dnf/dnf.conf
-  echo "defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf
-  echo "keepcache=True" | sudo tee -a /etc/dnf/dnf.conf
+  echo "# Added for Speed" | sudo tee -a /etc/dnf/dnf.conf &>/dev/null
+  echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf &>/dev/null
+  echo "max_parallel_downloads=5" | sudo tee -a /etc/dnf/dnf.conf &>/dev/null
+  echo "defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf &>/dev/null
+  echo "keepcache=True" | sudo tee -a /etc/dnf/dnf.conf &>/dev/null
 fi
 
 if [ "$package_manager" = "apt" ]; then

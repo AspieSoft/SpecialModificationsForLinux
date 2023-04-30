@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Get package manager type
-if [ "$(which apt)" != "" ]; then
+if [ "$(which apt)" != "" ] &>/dev/null; then
   package_manager="apt"
-elif [ "$(which dnf)" != "" ]; then
+elif [ "$(which dnf)" != "" ] &>/dev/null; then
   package_manager="dnf"
 else
   echo "Error: Package Manager Unsupported"
@@ -139,7 +139,7 @@ loading=$(startLoading "Fixing other common issues")
 
   # hide snap folder
   if ! grep -q "snap" "$HOME/.hidden" ; then
-    echo snap | sudo tee -a "$HOME/.hidden"
+    echo snap | sudo tee -a "$HOME/.hidden" &>/dev/null
   fi
 
   if ! sudo grep -q "snap" "/etc/skel/.hidden" ; then
@@ -148,7 +148,7 @@ loading=$(startLoading "Fixing other common issues")
 
   # hide Steam folder
   if ! grep -q "Steam" "$HOME/.hidden" ; then
-    echo snap | sudo tee -a "$HOME/.hidden"
+    echo snap | sudo tee -a "$HOME/.hidden" &>/dev/null
   fi
 
   if ! sudo grep -q "Steam" "/etc/skel/.hidden" ; then

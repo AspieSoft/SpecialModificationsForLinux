@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ "$(which apt)" != "" ]; then
+if [ "$(which apt)" != "" ] &>/dev/null; then
   package_manager="apt"
-elif [ "$(which dnf)" != "" ]; then
+elif [ "$(which dnf)" != "" ] &>/dev/null; then
   package_manager="dnf"
 else
   echo "Error: Package Manager Unsupported"

@@ -43,8 +43,8 @@ loading=$(startLoading "Upgrading preformance")
     sudo apt -y install preload &>/dev/null
   fi
 
-  systemctl start preload &>/dev/null
-  systemctl enable preload &>/dev/null
+  sudo systemctl start preload &>/dev/null
+  sudo systemctl enable preload &>/dev/null
 
   sudo add-apt-repository -y ppa:linrunner/tlp &>/dev/null
   sudo apt -y update &>/dev/null
@@ -56,8 +56,8 @@ loading=$(startLoading "Upgrading preformance")
     sudo apt -y install tlp-rdw &>/dev/null
   fi
 
-  systemctl start tlp &>/dev/null
-  systemctl enable tlp &>/dev/null
+  sudo systemctl start tlp &>/dev/null
+  sudo systemctl enable tlp &>/dev/null
   sudo tlp start &>/dev/null
 
   if [ $(hasPackage "thermald") = "false" ] ; then
