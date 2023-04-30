@@ -245,6 +245,22 @@ fi
 # update
 runUpdate "true"
 
+
+# reset login timeout
+sudo sed -r -i 's/^Defaults([\t ]+)(.*)env_reset(.*), (timestamp_timeout=1801,?\s*)+$/Defaults\1\2env_reset\3/m' /etc/sudoers &>/dev/null
+
+# enable sleep
+sudo systemctl --runtime unmask sleep.target suspend.target hibernate.target hybrid-sleep.target &>/dev/null
+
+# enable auto updates
+if [ "$package_manager" = "apt" ]; then
+  sudo sed -r -i 's/^APT::Periodic::Update-Package-Lists "([0-9]+)";$/APT::Periodic::Update-Package-Lists "1";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
+  sudo sed -r -i 's/^APT::Periodic::Unattended-Upgrade "([0-9]+)";$/APT::Periodic::Unattended-Upgrade "1";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
+else
+  gsettings set org.gnome.software download-updates true
+fi
+
+
 if [ "$package_manager" = "apt" ]; then
   sudo apt-get -y autoremove &>/dev/null
 
