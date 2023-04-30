@@ -102,6 +102,10 @@ if [ "$installNemo" = true ] ; then
 
     sudo sed -r -i "s/^OnlyShowIn=/#OnlyShowIn=/m" /usr/share/applications/nemo.desktop
 
+    if [ $(hasPackage "nemo-fileroller") = "false" ] ; then
+      sudo dnf -y install nemo-fileroller &>/dev/null
+    fi
+
     endLoading "$loading"
   ) &
   runLoading "$loading"
@@ -155,7 +159,7 @@ fi
 # gnome tools
 if echo $XDG_CURRENT_DESKTOP | grep GNOME &>/dev/null ; then
   # gnome-tweak-tool
-  if [ $(hasPackage "gnome-tweak-tool") = "false" ] ; then
+  if [ $(hasPackage "gnome-tweaks") = "false" ] ; then
     loading=$(startLoading "Installing Gnome Tweak Tool")
     (
       # may be needed for gnome tweaks
@@ -222,8 +226,10 @@ fi
 if [ $(hasPackage "obs-studio") = "false" ] ; then
   loading=$(startLoading "Installing OBS Studio")
   (
+
     sudo dnf -y --skip-broken install ffmpeg &>/dev/null
     sudo dnf -y --allowerasing install obs-studio &>/dev/null
+    # sudo flatpak install -y flathub com.obsproject.Studio &>/dev/null
 
     sudo mkdir -p ~/.config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
     sudo cp -R -f ./bin/apps/advanced-scene-switcher/* ~/.config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
@@ -315,8 +321,9 @@ fi
 
 if [ $(hasPackage "steam") = "false" ] ; then
   loading=$(startLoading "Installing Steam")
-  (
-    sudo dnf -y --skip-broken install steam &>/dev/null
+  (flatpak
+    # sudo dnf -y --skip-broken install steam &>/dev/null
+    sudo flatpak install -y flathub com.valvesoftware.Steam &>/dev/null
 
     if ! [ ! -z $(grep "Steam" "$HOME/.hidden") ] ; then
       echo 'Steam' | sudo tee -a $HOME/.hidden &>/dev/null
