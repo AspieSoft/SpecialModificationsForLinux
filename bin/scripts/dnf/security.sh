@@ -11,6 +11,9 @@ trap cleanup EXIT
 # install clamav, bleachbit, etc.
 loading=$(startLoading "Installing Security Software")
 (
+
+  #todo: lookup different clamav install for fedora https://www.linuxcapable.com/install-clamav-on-fedora-linux/
+
   sudo dnf -y install clamav clamd clamav-update &>/dev/null
 
   sudo systemctl stop clamav-freshclam &>/dev/null
