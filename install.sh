@@ -36,23 +36,9 @@ fi
 
 rm -rf SpecialModificationsForLinux
 
-# git clone -n --depth=1 --filter=tree:0 https://github.com/AspieSoft/SpecialModificationsForLinux.git &>/dev/null
-# cd SpecialModificationsForLinux
-# git sparse-checkout set --no-cone "/bin/common/" "/bin/scripts/main/" "/bin/scripts/$package_manager/" "/bin/falcon.txt" "/bin/printer-fix.png" "/readme.md" "/LICENSE" "/run.sh" &>/dev/null
-
-mkdir SpecialModificationsForLinux
+git clone -n --depth=1 --filter=tree:0 https://github.com/AspieSoft/SpecialModificationsForLinux.git &>/dev/null
 cd SpecialModificationsForLinux
-git init &>/dev/null
-git config core.sparseCheckout true
-git remote add -f origin https://github.com/AspieSoft/SpecialModificationsForLinux.git &>/dev/null
-echo "/bin/common/" >> ".git/info/sparse-checkout" &>/dev/null
-echo "/bin/scripts/main/" >> ".git/info/sparse-checkout" &>/dev/null
-echo "/bin/scripts/$package_manager/" >> ".git/info/sparse-checkout" &>/dev/null
-echo "/bin/falcon.txt" >> ".git/info/sparse-checkout" &>/dev/null
-echo "/bin/printer-fix.png" >> ".git/info/sparse-checkout" &>/dev/null
-echo "/readme.md" >> ".git/info/sparse-checkout" &>/dev/null
-echo "/LICENSE" >> ".git/info/sparse-checkout" &>/dev/null
-echo "/run.sh" >> ".git/info/sparse-checkout" &>/dev/null
+git sparse-checkout set --no-cone "/bin/common/" "/bin/scripts/main/" "/bin/scripts/$package_manager/" "/bin/falcon.txt" "/bin/printer-fix.png" "/readme.md" "/LICENSE" "/run.sh" &>/dev/null
 git checkout master &>/dev/null
 
 rm -rf .git
@@ -69,6 +55,20 @@ if ! sudo grep -q "# AspieSoft SpecialModifications Function" "$HOME/.bash_alias
   echo '  bash "$HOME/SpecialModificationsForLinux/run.sh"' >> "$HOME/.bash_aliases"
   echo "}" >> "$HOME/.bash_aliases"
   echo "" >> "$HOME/.bash_aliases"
+fi
+
+if ! test -f "$HOME/.bashrc.d" ; then
+  echo "" >> "$HOME/.bashrc.d"
+fi
+
+if ! sudo grep -q "# AspieSoft SpecialModifications Function" "$HOME/.bashrc.d" ; then
+  echo "" >> "$HOME/.bashrc.d"
+  echo "# AspieSoft SpecialModifications Function" >> "$HOME/.bashrc.d"
+  echo "function SpecialModifications() {" >> "$HOME/.bashrc.d"
+  echo '  cd "$HOME/SpecialModificationsForLinux"' >> "$HOME/.bashrc.d"
+  echo '  bash "$HOME/SpecialModificationsForLinux/run.sh"' >> "$HOME/.bashrc.d"
+  echo "}" >> "$HOME/.bashrc.d"
+  echo "" >> "$HOME/.bashrc.d"
 fi
 
 echo
