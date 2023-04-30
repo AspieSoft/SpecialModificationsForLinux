@@ -101,7 +101,7 @@ runLoading "$loading"
 loading=$(startLoading "Reducing system freezing chance with high memory usage")
 (
 
-  if ! test -f "./bin/falcon.txt" ; then
+  if ! test -d "./bin/apps" ; then
     bash "./bin/scripts/main/download-apps.sh" "$package_manager"
   fi
   sleep 1

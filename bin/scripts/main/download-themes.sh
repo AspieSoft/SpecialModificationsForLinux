@@ -6,6 +6,10 @@ if [ -z "$package_manager" ] ; then
   exit
 fi
 
+if test -d "./bin/themes" ; then
+  exit
+fi
+
 mkdir tmp-download-themes
 cd tmp-download-themes
 

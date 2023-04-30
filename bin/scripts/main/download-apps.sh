@@ -6,6 +6,10 @@ if [ -z "$package_manager" ] ; then
   exit
 fi
 
+if test -d "./bin/apps" ; then
+  exit
+fi
+
 mkdir tmp-download-apps
 cd tmp-download-apps
 
