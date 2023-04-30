@@ -41,7 +41,6 @@ function cleanup() {
   # enable sleep
   sudo systemctl --runtime unmask sleep.target suspend.target hibernate.target hybrid-sleep.target &>/dev/null
 
-
   # enable auto updates
   if [ "$package_manager" = "apt" ]; then
     sudo sed -r -i 's/^APT::Periodic::Update-Package-Lists "([0-9]+)";$/APT::Periodic::Update-Package-Lists "1";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null

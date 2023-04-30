@@ -34,8 +34,8 @@ loading=$(startLoading "Installing Python")
   sudo apt -y install python &>/dev/null
   sudo apt -y install python3 &>/dev/null
 
-  sudo apt -y install python-pip
-  sudo apt -y install python3-pip
+  sudo apt -y install python-pip &>/dev/null
+  sudo apt -y install python3-pip &>/dev/null
 
   endLoading "$loading"
 ) &
