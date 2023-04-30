@@ -100,6 +100,12 @@ runLoading "$loading"
 
 loading=$(startLoading "Reducing system freezing chance with high memory usage")
 (
+
+  if ! test -f "./bin/falcon.txt" ; then
+    bash "./bin/scripts/main/download-apps.sh" "$package_manager"
+  fi
+  sleep 1
+
   sudo cp ./bin/apps/set-ram-limit.sh /etc/init.d/set-ram-limit
   sudo chmod +x /etc/init.d/set-ram-limit
 

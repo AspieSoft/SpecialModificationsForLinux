@@ -178,12 +178,20 @@ fi
 
 # async download themes
 if [ "$setNewTheme" = "true" ]; then
-  setNewThemeReady="false"
+  setNewThemesReady="false"
   (
     bash "./bin/scripts/main/download-themes.sh" "$package_manager"
-    setNewThemeReady="true"
+    setNewThemesReady="true"
   ) &
 fi
+
+
+# async download apps
+setAppsReady="false"
+(
+  bash "./bin/scripts/main/download-apps.sh" "$package_manager"
+  setAppsReady="true"
+) &
 
 
 bash "./bin/scripts/$package_manager/programing-languages.sh" "$installExtras" "$installOracleJava"
@@ -198,6 +206,12 @@ bash ./bin/scripts/main/fix.sh "true"
 
 # update
 runUpdate
+
+# wait for apps to finish installing
+while [ "$setAppsReady" != "true" ]; do
+  sleep 1
+done
+sleep 1
 
 # install security
 bash "./bin/scripts/$package_manager/security.sh"
@@ -240,10 +254,10 @@ elif [ "$package_manager" = "dnf" ]; then
   fi
 
   if [ "$setNewTheme" = "true" ]; then
-    while [ "$setNewThemeReady" != "true" ]; do
+    # wait for themes to finish installing
+    while [ "$setNewThemesReady" != "true" ]; do
       sleep 1
     done
-
     sleep 1
 
     bash ./bin/scripts/$package_manager/theme.sh

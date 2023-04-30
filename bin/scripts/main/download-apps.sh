@@ -6,15 +6,15 @@ if [ -z "$package_manager" ] ; then
   exit
 fi
 
-mkdir tmp-download-themes
-cd tmp-download-themes
+mkdir tmp-download-apps
+cd tmp-download-apps
 
 git clone -n --depth=1 --filter=tree:0 https://github.com/AspieSoft/SpecialModificationsForLinux.git
 cd SpecialModificationsForLinux
 
-git sparse-checkout set --no-cone "/bin/themes/"
+git sparse-checkout set --no-cone "/bin/apps/"
 
-mv bin/themes ../../bin
+mv bin/apps ../../bin
 
 cd ../..
-rm -rf tmp-download-themes
+rm -rf tmp-download-apps
