@@ -236,7 +236,7 @@ if [ $(hasPackage "atom") = "false" ] ; then
   (
     sudo snap install --classic atom &>/dev/null
 
-    sudo mkdir -p $HOME/atom &>/dev/null
+    sudo mkdir -p $HOME/.atom &>/dev/null
     sudo cp -R -f ./bin/apps/atom/* $HOME/.atom &>/dev/null
 
     # for new users

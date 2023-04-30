@@ -66,21 +66,19 @@ runLoading "$loading"
 
 
 # install snap
-if [ "$installNemo" = true ] ; then
-  loading=$(startLoading "Installing Snap")
-  (
-    if [ $(hasPackage "snapd") = "false" ] ; then
-      sudo dnf -y install snapd &>/dev/null
-    fi
+# loading=$(startLoading "Installing Snap")
+# (
+#   if [ $(hasPackage "snapd") = "false" ] ; then
+#     sudo dnf -y install snapd &>/dev/null
+#   fi
 
-    sudo ln -s /var/lib/snapd/snap /snap
+#   sudo ln -s /var/lib/snapd/snap /snap
 
-    sudo snap refresh &>/dev/null
+#   sudo snap refresh &>/dev/null
 
-    endLoading "$loading"
-  ) &
-  runLoading "$loading"
-fi
+#   endLoading "$loading"
+# ) &
+# runLoading "$loading"
 
 
 # install nemo
@@ -162,11 +160,6 @@ if echo $XDG_CURRENT_DESKTOP | grep GNOME &>/dev/null ; then
   if [ $(hasPackage "gnome-tweaks") = "false" ] ; then
     loading=$(startLoading "Installing Gnome Tweak Tool")
     (
-      # may be needed for gnome tweaks
-      # sudo snap install gtk-theme-orchis
-
-      #todo: fix gnome tweaks
-      #sudo dnf -y install gnome-tweak-tool &>/dev/null
       sudo dnf -y install gnome-tweaks &>/dev/null
 
       endLoading "$loading"
@@ -226,17 +219,28 @@ fi
 if [ $(hasPackage "obs-studio") = "false" ] ; then
   loading=$(startLoading "Installing OBS Studio")
   (
-
     sudo dnf -y --skip-broken install ffmpeg &>/dev/null
-    sudo dnf -y --allowerasing install obs-studio &>/dev/null
-    # sudo flatpak install -y flathub com.obsproject.Studio &>/dev/null
+    # sudo dnf -y --allowerasing install obs-studio &>/dev/null
+    sudo flatpak install -y flathub com.obsproject.Studio &>/dev/null
 
-    sudo mkdir -p ~/.config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
-    sudo cp -R -f ./bin/apps/advanced-scene-switcher/* ~/.config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
+    # plugins
+    sudo mkdir -p "$HOME/.var/app/com.obsproject.Studio/config/obs-studio/plugins/advanced-scene-switcher" &>/dev/null
+    sudo cp -R -f ./bin/apps/advanced-scene-switcher/* "$HOME/.var/app/com.obsproject.Studio/config/obs-studio/plugins/advanced-scene-switcher" &>/dev/null
 
-    # for new users
-    sudo mkdir -p /etc/skel/.config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
-    sudo cp -R -f ./bin/apps/advanced-scene-switcher/* /etc/skel/.config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
+    # # for new users
+    sudo mkdir -p /etc/skel/.var/app/com.obsproject.Studio/config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
+    sudo cp -R -f ./bin/apps/advanced-scene-switcher/* /etc/skel/.var/app/com.obsproject.Studio/config/obs-studio/plugins/advanced-scene-switcher &>/dev/null
+
+    endLoading "$loading"
+  ) &
+  runLoading "$loading"
+fi
+
+
+if [ $(hasPackage "shotcut") = "false" ] ; then
+  loading=$(startLoading "Installing Shotcut")
+  (
+    sudo flatpak install -y flathub org.shotcut.Shotcut &>/dev/null
 
     endLoading "$loading"
   ) &
@@ -247,14 +251,15 @@ fi
 if [ $(hasPackage "atom") = "false" ] ; then
   loading=$(startLoading "Installing Atom Text Editor")
   (
-    sudo snap install --classic atom &>/dev/null
+    # sudo snap install --classic atom &>/dev/null
+    sudo flatpak install -y flathub io.atom.Atom &>/dev/null
 
-    sudo mkdir -p $HOME/atom &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* $HOME/.atom &>/dev/null
+    sudo mkdir -p "$HOME/.var/app/io.atom.Atom/data" &>/dev/null
+    sudo cp -R -f ./bin/apps/atom/* "$HOME/.var/app/io.atom.Atom/data" &>/dev/null
 
     # for new users
-    sudo mkdir -p /etc/skel/.atom &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* /etc/skel/.atom &>/dev/null
+    sudo mkdir -p /etc/skel/.var/app/io.atom.Atom/data &>/dev/null
+    sudo cp -R -f ./bin/apps/atom/* /etc/skel/.var/app/io.atom.Atom/data &>/dev/null
 
     endLoading "$loading"
   ) &
@@ -265,13 +270,14 @@ fi
 if [ $(hasPackage "code") = "false" ] ; then
   loading=$(startLoading "Installing VSCode")
   (
-    sudo snap install --classic code &>/dev/null
+    # sudo snap install --classic code &>/dev/null
+    sudo flatpak install -y flathub com.visualstudio.code &>/dev/null
 
     code --install-extension Shan.code-settings-sync &>/dev/null
 
     # for new users
-    sudo mkdir -p /etc/skel/.vscode/extensions &>/dev/null
-    sudo cp -R -f ~/.vscode/extensions/* /etc/skel/.vscode/extensions &>/dev/null
+    sudo mkdir -p /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
+    sudo cp -R -f "$HOME/.var/app/com.visualstudio.code/data/vscode/extensions/*" /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
 
     endLoading "$loading"
   ) &
@@ -282,7 +288,8 @@ fi
 if [ $(hasPackage "eclipse") = "false" ] ; then
   loading=$(startLoading "Installing Eclipse")
   (
-    sudo snap install --classic eclipse &>/dev/null
+    # sudo snap install --classic eclipse &>/dev/null
+    sudo flatpak install -y flathub org.eclipse.Java &>/dev/null
 
     endLoading "$loading"
   ) &
@@ -293,7 +300,9 @@ fi
 if [ $(hasPackage "blender") = "false" ] ; then
   loading=$(startLoading "Installing Blender")
   (
-    sudo snap install --classic blender &>/dev/null
+    # sudo snap install --classic blender &>/dev/null
+    sudo flatpak install -y flathub org.blender.Blender &>/dev/null
+
     endLoading "$loading"
   ) &
   runLoading "$loading"
@@ -303,7 +312,9 @@ fi
 if [ $(hasPackage "gimp") = "false" ] ; then
   loading=$(startLoading "Installing GNU Image Manipulation")
   (
-    sudo snap install gimp &>/dev/null
+    # sudo snap install gimp &>/dev/null
+    sudo flatpak install -y flathub org.gimp.GIMP &>/dev/null
+
     endLoading "$loading"
   ) &
   runLoading "$loading"
@@ -343,7 +354,9 @@ fi
 if [ $(hasPackage "video-downloader") = "false" ] ; then
   loading=$(startLoading "Installing Video Downloader")
   (
-    sudo snap install video-downloader &>/dev/null
+    # sudo snap install video-downloader &>/dev/null
+    sudo flatpak install -y flathub com.github.unrud.VideoDownloader &>/dev/null
+
     endLoading "$loading"
   ) &
   runLoading "$loading"
