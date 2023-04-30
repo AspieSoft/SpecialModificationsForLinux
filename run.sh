@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $(dirname "$0")
+
 echo "Special Modifacations by AspieSoft"
 echo "$(cat ./bin/falcon.txt)"
 echo
@@ -33,13 +35,13 @@ function main() {
   if [ "$input" -eq "0" ] ; then
     exit
   elif [ "$input" -eq "1" ] ; then
-    bash ./bin/scripts/setup.sh
+    bash ./bin/scripts/main/setup.sh
   elif [ "$input" -eq "2" ] ; then
-    bash ./bin/scripts/fix.sh
+    bash ./bin/scripts/main/fix.sh
   elif [ "$input" -eq "3" ] ; then
-    bash ./bin/scripts/virus-scan.sh
+    bash ./bin/scripts/main/virus-scan.sh
   elif [ "$input" -eq "4" ] ; then
-    bash ./bin/scripts/update-linux-kernel.sh
+    bash ./bin/scripts/main/update-linux-kernel.sh
   else
     exit
   fi

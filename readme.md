@@ -18,6 +18,8 @@ Personally, I mostly use ZorinOS, so it may be slightly more optimized for zorin
 
 1. Download and Extract the SpecialModifications.tar.gz
 
+2. Open the folder and double click "install.sh" to install the script for the first time
+
 2. Open the folder and double click "run.sh" to start the script
 
 3. Click "Run In Terminal" (if asked)
