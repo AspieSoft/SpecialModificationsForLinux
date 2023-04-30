@@ -43,7 +43,7 @@ function cleanup() {
 
 
   # enable auto updates
-  if [ package_manager="apt" ]; then
+  if [ "$package_manager" = "apt" ]; then
     sudo sed -r -i 's/^APT::Periodic::Update-Package-Lists "([0-9]+)";$/APT::Periodic::Update-Package-Lists "1";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
     sudo sed -r -i 's/^APT::Periodic::Unattended-Upgrade "([0-9]+)";$/APT::Periodic::Unattended-Upgrade "1";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
   else
@@ -65,7 +65,7 @@ sudo sed -r -i 's/^Defaults([\t ]+)(.*)env_reset(.*)$/Defaults\1\2env_reset\3, t
 sudo systemctl --runtime mask sleep.target suspend.target hibernate.target hybrid-sleep.target &>/dev/null
 
 # disable auto updates
-if [ package_manager="apt" ]; then
+if [ "$package_manager" = "apt" ]; then
   sudo sed -r -i 's/^APT::Periodic::Update-Package-Lists "([0-9]+)";$/APT::Periodic::Update-Package-Lists "0";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
   sudo sed -r -i 's/^APT::Periodic::Unattended-Upgrade "([0-9]+)";$/APT::Periodic::Unattended-Upgrade "0";/m' /etc/apt/apt.conf.d/20auto-upgrades &>/dev/null
 else
@@ -77,7 +77,7 @@ grubTimeout=$(numberInput "What do you want to set the grub time to" "5" "0" "30
 
 grubBadRam=$(ynInput "Would you like to Enable BadRAM Filtering" "y")
 
-if [ package_manager="apt" ]; then
+if [ "$package_manager" = "apt" ]; then
   disableUbuntuErrorReporting=$(ynInput "Would you like to Disable Ubuntu Error Reporting" "y")
 else
   disableUbuntuErrorReporting="false"
@@ -85,9 +85,14 @@ fi
 
 installNemo=$(ynInput "Would you like to Install The Nemo File Manager" "y")
 installWine=$(ynInput "Would you like to Install WINE" "y")
-installIce=$(ynInput "Would you like to Install ICE" "y")
 
-if [ package_manager="apt" ]; then
+if [ "$package_manager" = "apt" ]; then
+  installIce=$(ynInput "Would you like to Install ICE" "y")
+else
+  installIce="false"
+fi
+
+if [ "$package_manager" = "apt" ]; then
   installKeyboardCursor=$(ynInput "Would you like to Install Aspiesoft Keyboard Cursor [CapsLock to enable, arrow keys to move mouse]" "n")
 else
   installKeyboardCursor="false"
@@ -98,7 +103,7 @@ installRecommended=$(ynInput "Would you like to Install Other Recommended Apps" 
 #installExtras=$(ynInput "Would you like to Install Ubuntu Restricted Extras" "y")
 installExtras="false"
 
-if [ package_manager="apt" ]; then
+if [ "$package_manager" = "apt" ]; then
   installOracleJava=$(ynInput "Would you like to Install Oracle Java 17" "y")
 else
   installOracleJava="false"

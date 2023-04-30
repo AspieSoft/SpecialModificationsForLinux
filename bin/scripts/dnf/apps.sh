@@ -130,15 +130,15 @@ fi
 
 
 # guake terminal
-if [ $(hasPackage "guake") = "false" ] ; then
-  loading=$(startLoading "Installing Guake Terminal")
-  (
-    #todo: find alternative to guake (dropdown terminal)
-    # sudo apt -y install guake &>/dev/null
-    endLoading "$loading"
-  ) &
-  runLoading "$loading"
-fi
+# if [ $(hasPackage "guake") = "false" ] ; then
+#   loading=$(startLoading "Installing Guake Terminal")
+#   (
+#     #todo: find alternative to guake (dropdown terminal)
+#     # sudo apt -y install guake &>/dev/null
+#     endLoading "$loading"
+#   ) &
+#   runLoading "$loading"
+# fi
 
 
 # dconf-editor
