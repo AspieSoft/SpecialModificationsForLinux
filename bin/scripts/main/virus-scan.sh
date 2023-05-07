@@ -24,7 +24,10 @@ echo
 echo "Scanning for viruses..."
 
 scanFinished=$(mktemp) && echo "false" >$scanFinished
-(sudo clamscan -r --bell --move="/VirusScan/quarantine" --exclude-dir="/VirusScan/quarantine" --exclude-dir="/home/$USER/.clamtk/viruses" --exclude-dir="smb4k" --exclude-dir="/run/user/$USER/gvfs" --exclude-dir="/home/$USER/.gvfs" --exclude-dir=".thunderbird" --exclude-dir=".mozilla-thunderbird" --exclude-dir=".evolution" --exclude-dir="Mail" --exclude-dir="kmail" --exclude-dir="^/sys" $scanDir &> scan.log && echo "true" > $scanFinished) &
+(
+  sudo nice -n 15 clamscan &>/dev/null
+  sudo clamscan -r --bell --move="/VirusScan/quarantine" --exclude-dir="/VirusScan/quarantine" --exclude-dir="/home/$USER/.clamtk/viruses" --exclude-dir="smb4k" --exclude-dir="/run/user/$USER/gvfs" --exclude-dir="/home/$USER/.gvfs" --exclude-dir=".thunderbird" --exclude-dir=".mozilla-thunderbird" --exclude-dir=".evolution" --exclude-dir="Mail" --exclude-dir="kmail" --exclude-dir="^/sys" $scanDir &> scan.log && echo "true" > $scanFinished
+) &
 
 tempFileCount=$(mktemp) && echo "false" >$tempFileCount
 (echo $(sudo ls --ignore="/VirusScan/quarantine" --ignore="/home/$USER/.clamtk/viruses" --ignore="smb4k" --ignore="/run/user/$USER/gvfs" --ignore="/home/$USER/.gvfs" --ignore=".thunderbird" --ignore=".mozilla-thunderbird" --ignore=".evolution" --ignore="Mail" --ignore="kmail" --ignore="^/sys" -l -R $scanDir | grep ^- | awk '{print $9}' | wc -l) > $tempFileCount) &

@@ -28,6 +28,8 @@ loading=$(startLoading "Installing Security Software")
   #cp -R -f ./bin/apps/clamtk/* ~/.clamtk
   #sudo sed -r -i "s/USERNAME/$USER/g" ~/.clamtk/cron
 
+  sudo dnf install cronie
+
   sudo freshclam &>/dev/null
   sudo mkdir -p /VirusScan/quarantine &>/dev/null
   sudo chmod 664 /VirusScan/quarantine &>/dev/null

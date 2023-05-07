@@ -19,11 +19,12 @@ fi
 echo "$FILE" >> $scanList
 
 (
-  fileName=$(echo $FILE | sed -e "s#^$DIR/##")
+  fileName=$(echo "$FILE" | sed -e "s#^$DIR/##")
 
   notify-send -i "/etc/aspiesoft-clamav-scanner/icon.png" -t 3 "Started Scanning" "$fileName"
 
-  clamscan -r --bell --move="/VirusScan/quarantine" --exclude-dir="/VirusScan/quarantine" $FILE &>/dev/null
+  sudo nice -n 15 clamscan &>/dev/null
+  clamscan -r --bell --move="/VirusScan/quarantine" --exclude-dir="/VirusScan/quarantine" "$FILE" &>/dev/null
   sed "#^$FILE$#d" $scanList
 
   if [ -s "$FILE" ] ; then
