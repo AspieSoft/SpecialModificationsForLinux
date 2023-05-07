@@ -55,6 +55,19 @@ loading=$(startLoading "Adding Repositorys")
     echo 'gpgcheck=1' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
     echo 'gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
   fi
+
+  # add repo for atom text editor
+  sudo rpm --import https://packagecloud.io/AtomEditor/atom/gpgkey
+  if ! test -f "/etc/yum.repos.d/atom.repo" ; then
+    echo '[Atom]' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
+    echo 'name=atom' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
+    echo 'baseurl=https://packagecloud.io/AtomEditor/atom/el/7/$basearch' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
+    echo 'enabled=1' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
+    echo 'gpgcheck=0' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
+    echo 'repo_gpgcheck=1' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
+    echo 'gpgkey=https://packagecloud.io/AtomEditor/atom/gpgkey' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
+  fi
+
   sudo dnf check-update
 
 
@@ -275,15 +288,14 @@ fi
 if [ $(hasPackage "atom") = "false" ] ; then
   loading=$(startLoading "Installing Atom Text Editor")
   (
-    # sudo snap install --classic atom &>/dev/null
-    sudo flatpak install -y flathub io.atom.Atom &>/dev/null
+    sudo dnf -y install atom &>/dev/null
 
-    sudo mkdir -p "$HOME/.var/app/io.atom.Atom/data" &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* "$HOME/.var/app/io.atom.Atom/data" &>/dev/null
+    sudo mkdir -p $HOME/.atom &>/dev/null
+    sudo cp -R -f ./bin/apps/atom/* $HOME/.atom &>/dev/null
 
     # for new users
-    sudo mkdir -p /etc/skel/.var/app/io.atom.Atom/data &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* /etc/skel/.var/app/io.atom.Atom/data &>/dev/null
+    sudo mkdir -p /etc/skel/.atom &>/dev/null
+    sudo cp -R -f ./bin/apps/atom/* /etc/skel/.atom &>/dev/null
 
     endLoading "$loading"
   ) &
@@ -294,16 +306,11 @@ fi
 if [ $(hasPackage "code") = "false" ] ; then
   loading=$(startLoading "Installing VSCode")
   (
-    # sudo snap install --classic code &>/dev/null
-    # sudo flatpak install -y flathub com.visualstudio.code &>/dev/null
-
     sudo dnf -y install code &>/dev/null
 
     code --install-extension Shan.code-settings-sync &>/dev/null
 
     # for new users
-    # sudo mkdir -p /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
-    # sudo cp -R -f "$HOME/.var/app/com.visualstudio.code/data/vscode/extensions/*" /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
     sudo mkdir -p /etc/skel/.vscode/extensions &>/dev/null
     sudo cp -R -f ~/.vscode/extensions/* /etc/skel/.vscode/extensions &>/dev/null
 
