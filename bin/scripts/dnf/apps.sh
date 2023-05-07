@@ -344,7 +344,13 @@ if [ $(hasPackage "steam") = "false" ] ; then
   loading=$(startLoading "Installing Steam")
   (flatpak
     # sudo dnf -y --skip-broken install steam &>/dev/null
-    sudo flatpak install -y flathub com.valvesoftware.Steam &>/dev/null
+
+    # sudo flatpak install -y flathub com.valvesoftware.Steam &>/dev/null
+
+    sudo dnf -y module disable nodejs &>/dev/null
+    sudo dnf -y install steam &>/dev/null
+    sudo dnf -y module install -y nodejs:16/development &>/dev/null
+    # sudo dnf -y module enable nodejs &>/dev/null
 
     if ! [ ! -z $(grep "Steam" "$HOME/.hidden") ] ; then
       echo 'Steam' | sudo tee -a $HOME/.hidden &>/dev/null
