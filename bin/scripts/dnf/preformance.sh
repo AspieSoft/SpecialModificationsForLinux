@@ -41,6 +41,7 @@ loading=$(startLoading "Upgrading preformance")
 
   #todo: fix preload install not working
   if [ $(hasPackage "preload") = "false" ] ; then
+    sudo dnf -y copr enable elxreno/preload
     sudo dnf -y install preload &>/dev/null
   fi
 
@@ -77,6 +78,12 @@ loading=$(startLoading "Disabling time wasting startup programs")
   sudo systemctl disable accounts-daemon.service &>/dev/null # is a potential securite risk
   sudo systemctl disable debug-shell.service &>/dev/null # opens a giant security hole
   sudo systemctl disable pppd-dns.service &>/dev/null # dial-up internet (its way outdated)
+
+  # fedora
+  sudo systemctl disable nfs-client.target &>/dev/null # nfs file system
+  sudo systemctl disable remote-fs.target &>/dev/null # remote file systems
+
+  sudo dnf -y --noautoremove remove dmraid device-mapper-multipath &>/dev/null
 
   endLoading "$loading"
 ) &
