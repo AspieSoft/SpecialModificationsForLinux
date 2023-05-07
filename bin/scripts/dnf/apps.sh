@@ -44,6 +44,20 @@ loading=$(startLoading "Adding Repositorys")
   sudo dnf -y groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin --skip-broken &>/dev/null
   sudo dnf -y groupupdate sound-and-video &>/dev/null
 
+
+  # add microsoft keys for vscode
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+  if ! test -f "/etc/yum.repos.d/vscode.repo" ; then
+    echo '[code]' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
+    echo 'name=Visual Studio Code' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
+    echo 'baseurl=https://packages.microsoft.com/yumrepos/vscode' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
+    echo 'enabled=1' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
+    echo 'gpgcheck=1' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
+    echo 'gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
+  fi
+  sudo dnf check-update
+
+
   endLoading "$loading"
 ) &
 runLoading "$loading"
@@ -281,13 +295,17 @@ if [ $(hasPackage "code") = "false" ] ; then
   loading=$(startLoading "Installing VSCode")
   (
     # sudo snap install --classic code &>/dev/null
-    sudo flatpak install -y flathub com.visualstudio.code &>/dev/null
+    # sudo flatpak install -y flathub com.visualstudio.code &>/dev/null
+
+    sudo dnf -y install code &>/dev/null
 
     code --install-extension Shan.code-settings-sync &>/dev/null
 
     # for new users
-    sudo mkdir -p /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
-    sudo cp -R -f "$HOME/.var/app/com.visualstudio.code/data/vscode/extensions/*" /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
+    # sudo mkdir -p /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
+    # sudo cp -R -f "$HOME/.var/app/com.visualstudio.code/data/vscode/extensions/*" /etc/skel/.var/app/com.visualstudio.code/data/vscode/extensions &>/dev/null
+    sudo mkdir -p /etc/skel/.vscode/extensions &>/dev/null
+    sudo cp -R -f ~/.vscode/extensions/* /etc/skel/.vscode/extensions &>/dev/null
 
     endLoading "$loading"
   ) &
@@ -353,12 +371,12 @@ if [ $(hasPackage "steam") = "false" ] ; then
     # sudo dnf -y module enable nodejs &>/dev/null
 
     if ! [ ! -z $(grep "Steam" "$HOME/.hidden") ] ; then
-      echo 'Steam' | sudo tee -a $HOME/.hidden &>/dev/null
+      echo 'Steam' | sudo tee -a "$HOME/.hidden" &>/dev/null
     fi
 
     # for new users
     if ! [ ! -z $(grep "Steam" "/etc/skel/.hidden") ] ; then
-      echo 'Steam' | sudo tee -a /etc/skel/.hidden &>/dev/null
+      echo 'Steam' | sudo tee -a "/etc/skel/.hidden" &>/dev/null
     fi
 
     endLoading "$loading"
