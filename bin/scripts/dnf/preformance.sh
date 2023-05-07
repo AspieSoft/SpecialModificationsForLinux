@@ -39,7 +39,6 @@ runLoading "$loading"
 loading=$(startLoading "Upgrading preformance")
 (
 
-  #todo: fix preload install not working
   if [ $(hasPackage "preload") = "false" ] ; then
     sudo dnf -y copr enable elxreno/preload
     sudo dnf -y install preload &>/dev/null
