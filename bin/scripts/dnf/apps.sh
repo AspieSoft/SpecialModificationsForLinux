@@ -65,6 +65,16 @@ loading=$(startLoading "Installing Neofetch")
 runLoading "$loading"
 
 
+# install flatseal
+loading=$(startLoading "Installing Flatseal")
+(
+  sudo flatpak install -y flathub com.github.tchx84.Flatseal &>/dev/null
+
+  endLoading "$loading"
+) &
+runLoading "$loading"
+
+
 # install snap
 # loading=$(startLoading "Installing Snap")
 # (
