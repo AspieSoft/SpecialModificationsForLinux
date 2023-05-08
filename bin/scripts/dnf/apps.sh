@@ -46,6 +46,7 @@ loading=$(startLoading "Adding Repositorys")
 
 
   sudo dnf -y install fedora-workstation-repositories &>/dev/null
+  sudo dnf -y config-manager --set-enabled google-chrome &>/dev/null
 
 
   # add microsoft keys for vscode
