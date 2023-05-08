@@ -45,6 +45,9 @@ loading=$(startLoading "Adding Repositorys")
   sudo dnf -y groupupdate sound-and-video &>/dev/null
 
 
+  sudo dnf -y install fedora-workstation-repositories &>/dev/null
+
+
   # add microsoft keys for vscode
   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
   if ! test -f "/etc/yum.repos.d/vscode.repo" ; then
