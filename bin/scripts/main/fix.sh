@@ -130,29 +130,29 @@ loading=$(startLoading "Fixing other common issues")
 
   # hide core folder
   if ! grep -q "core" "$HOME/.hidden" ; then
-    echo snap | sudo tee -a "$HOME/.hidden" &>/dev/null
+    echo "core" | sudo tee -a "$HOME/.hidden" &>/dev/null
   fi
 
   if ! sudo grep -q "core" "/etc/skel/.hidden" ; then
-    echo snap | sudo tee -a "/etc/skel/.hidden" &>/dev/null
+    echo "core" | sudo tee -a "/etc/skel/.hidden" &>/dev/null
   fi
 
   # hide snap folder
   if ! grep -q "snap" "$HOME/.hidden" ; then
-    echo snap | sudo tee -a "$HOME/.hidden" &>/dev/null
+    echo "snap" | sudo tee -a "$HOME/.hidden" &>/dev/null
   fi
 
   if ! sudo grep -q "snap" "/etc/skel/.hidden" ; then
-    echo snap | sudo tee -a "/etc/skel/.hidden" &>/dev/null
+    echo "snap" | sudo tee -a "/etc/skel/.hidden" &>/dev/null
   fi
 
   # hide Steam folder
   if ! grep -q "Steam" "$HOME/.hidden" ; then
-    echo snap | sudo tee -a "$HOME/.hidden" &>/dev/null
+    echo "Steam" | sudo tee -a "$HOME/.hidden" &>/dev/null
   fi
 
   if ! sudo grep -q "Steam" "/etc/skel/.hidden" ; then
-    echo snap | sudo tee -a "/etc/skel/.hidden" &>/dev/null
+    echo "Steam" | sudo tee -a "/etc/skel/.hidden" &>/dev/null
   fi
 
   endLoading "$loading"
