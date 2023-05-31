@@ -16,7 +16,7 @@ gsettings set org.gnome.desktop.sound theme-name "zorin" &>/dev/null
 
 #todo: add gnome extentions
 sudo pip3 install --upgrade gnome-extentions-cli &>/dev/null
- 
+
 gext -F install arcmenu@arcmenu.com
 gext -F install dash-to-panel@jderose9.github.com
 gext -F install vertical-workspaces@G-dH.github.com
