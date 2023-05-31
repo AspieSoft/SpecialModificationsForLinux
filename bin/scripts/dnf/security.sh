@@ -35,40 +35,40 @@ loading=$(startLoading "Installing Security Software")
   sudo chmod 664 /VirusScan/quarantine &>/dev/null
 
   # fix clamav permissions
-  if grep -R "^ScanOnAccess " "/etc/clamav/clamd.conf"; then
-    sudo sed -r -i 's/^ScanOnAccess (.*)$/ScanOnAccess true/m' /etc/clamav/clamd.conf
+  if grep -R "^ScanOnAccess " "/etc/clamd.d/scan.conf"; then
+    sudo sed -r -i 's/^ScanOnAccess (.*)$/ScanOnAccess yes/m' /etc/clamd.d/scan.conf
   else
-    echo 'ScanOnAccess true' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+    echo 'ScanOnAccess yes' | sudo tee -a /etc/clamd.d/scan.conf &>/dev/null
   fi
 
-  if grep -R "^OnAccessMountPath " "/etc/clamav/clamd.conf"; then
-    sudo sed -r -i 's#^OnAccessMountPath (.*)$#OnAccessMountPath /#m' /etc/clamav/clamd.conf
+  if grep -R "^OnAccessMountPath " "/etc/clamd.d/scan.conf"; then
+    sudo sed -r -i 's#^OnAccessMountPath (.*)$#OnAccessMountPath /#m' /etc/clamd.d/scan.conf
   else
-    echo 'OnAccessMountPath /' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+    echo 'OnAccessMountPath /' | sudo tee -a /etc/clamd.d/scan.conf &>/dev/null
   fi
 
-  if grep -R "^OnAccessPrevention " "/etc/clamav/clamd.conf"; then
-    sudo sed -r -i 's/^OnAccessPrevention (.*)$/OnAccessPrevention false/m' /etc/clamav/clamd.conf
+  if grep -R "^OnAccessPrevention " "/etc/clamd.d/scan.conf"; then
+    sudo sed -r -i 's/^OnAccessPrevention (.*)$/OnAccessPrevention no/m' /etc/clamd.d/scan.conf
   else
-    echo 'OnAccessPrevention false' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+    echo 'OnAccessPrevention no' | sudo tee -a /etc/clamd.d/scan.conf &>/dev/null
   fi
 
-  if grep -R "^OnAccessExtraScanning " "/etc/clamav/clamd.conf"; then
-    sudo sed -r -i 's/^OnAccessExtraScanning (.*)$/OnAccessExtraScanning true/m' /etc/clamav/clamd.conf
+  if grep -R "^OnAccessExtraScanning " "/etc/clamd.d/scan.conf"; then
+    sudo sed -r -i 's/^OnAccessExtraScanning (.*)$/OnAccessExtraScanning yes/m' /etc/clamd.d/scan.conf
   else
-    echo 'OnAccessExtraScanning true' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+    echo 'OnAccessExtraScanning yes' | sudo tee -a /etc/clamd.d/scan.conf &>/dev/null
   fi
 
-  if grep -R "^OnAccessExcludeUID " "/etc/clamav/clamd.conf"; then
-    sudo sed -r -i 's/^OnAccessExcludeUID (.*)$/OnAccessExcludeUID 0/m' /etc/clamav/clamd.conf
+  if grep -R "^OnAccessExcludeUID " "/etc/clamd.d/scan.conf"; then
+    sudo sed -r -i 's/^OnAccessExcludeUID (.*)$/OnAccessExcludeUID 0/m' /etc/clamd.d/scan.conf
   else
-    echo 'OnAccessExcludeUID 0' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+    echo 'OnAccessExcludeUID 0' | sudo tee -a /etc/clamd.d/scan.conf &>/dev/null
   fi
 
-  if grep -R "^User " "/etc/clamav/clamd.conf"; then
-    sudo sed -r -i 's/^User (.*)$/User root/m' /etc/clamav/clamd.conf
+  if grep -R "^User " "/etc/clamd.d/scan.conf"; then
+    sudo sed -r -i 's/^User (.*)$/User root/m' /etc/clamd.d/scan.conf
   else
-    echo 'User root' | sudo tee -a /etc/clamav/clamd.conf &>/dev/null
+    echo 'User root' | sudo tee -a /etc/clamd.d/scan.conf &>/dev/null
   fi
 
   if [ $(hasPackage "bleachbit") = "false" ] ; then
