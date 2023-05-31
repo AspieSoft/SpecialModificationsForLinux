@@ -23,8 +23,7 @@ echo "$FILE" >> $scanList
 
   notify-send -i "/etc/aspiesoft-clamav-scanner/icon.png" -t 3 "Started Scanning" "$fileName"
 
-  sudo nice -n 15 clamscan &>/dev/null
-  clamscan -r --bell --move="/VirusScan/quarantine" --exclude-dir="/VirusScan/quarantine" "$FILE" &>/dev/null
+  sudo nice -n 15 clamscan && clamscan -r --bell --move="/VirusScan/quarantine" --exclude-dir="/VirusScan/quarantine" "$FILE" &>/dev/null
   sed "#^$FILE$#d" $scanList
 
   if [ -s "$FILE" ] ; then
