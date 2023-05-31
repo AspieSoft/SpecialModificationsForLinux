@@ -378,7 +378,7 @@ if [ $(hasPackage "steam") = "false" ] ; then
 
     sudo dnf -y module disable nodejs &>/dev/null
     sudo dnf -y install steam &>/dev/null
-    sudo dnf -y module install -y nodejs:16/development &>/dev/null
+    sudo dnf -y module install -y --allowerasing nodejs:16/development &>/dev/null
     # sudo dnf -y module enable nodejs &>/dev/null
 
     if ! [ ! -z $(grep "Steam" "$HOME/.hidden") ] ; then
