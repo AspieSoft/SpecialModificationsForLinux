@@ -186,7 +186,7 @@ if [ "$installKeyboardCursor" = true ] ; then
     sudo cp -R -f ./bin/apps/aspiesoft-keyboard-cursor/* /etc/aspiesoft-keyboard-cursor
     sudo rm -f /etc/aspiesoft-keyboard-cursor/aspiesoft-keyboard-cursor.desktop
 
-    sudo cp -f ./bin/apps/aspiesoft-keyboard-cursor/aspiesoft-keyboard-cursor.desktop $HOME/.config/autostart
+    sudo cp -f ./bin/apps/aspiesoft-keyboard-cursor/aspiesoft-keyboard-cursor.desktop "$HOME/.config/autostart"
 
     bash /etc/aspiesoft-keyboard-cursor/start.sh &
 
