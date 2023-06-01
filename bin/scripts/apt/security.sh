@@ -95,7 +95,7 @@ loading=$(startLoading "Setting Up Download Scanner")
   #sudo chmod +x /etc/init.d/aspiesoft-clamav-scanner
   #sudo ln -s /etc/init.d/aspiesoft-clamav-scanner /etc/rc.d/aspiesoft-clamav-scanner
 
-  sudo cp -f ./bin/apps/aspiesoft-clamav-scanner/aspiesoft-clamav-scanner.desktop /home/shaynejr/.config/autostart
+  sudo cp -f ./bin/apps/aspiesoft-clamav-scanner/aspiesoft-clamav-scanner.desktop $HOME/.config/autostart
 
   #sudo update-rc.d aspiesoft-clamav-scanner defaults
   #sudo /etc/init.d/aspiesoft-clamav-scanner start
