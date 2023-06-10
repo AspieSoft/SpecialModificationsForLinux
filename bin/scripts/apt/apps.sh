@@ -28,6 +28,10 @@ loading=$(startLoading "Adding Repositorys")
   sudo apt-add-repository -y ppa:obsproject/obs-studio &>/dev/null
   sudo apt-add-repository -y ppa:cybermax-dexter/sdl2-backport &>/dev/null
   sudo apt-add-repository -y ppa:pinta-maintainers/pinta-stable &>/dev/null
+
+  #wget -qO - https://typora.io/linux/public-key.asc | sudo tee /etc/apt/trusted.gpg.d/typora.asc &>/dev/null
+  #sudo add-apt-repository 'deb https://typora.io/linux ./' &>/dev/null
+
   endLoading "$loading"
 ) &
 runLoading "$loading"
@@ -325,3 +329,15 @@ if [ $(hasPackage "video-downloader") = "false" ] ; then
   ) &
   runLoading "$loading"
 fi
+
+
+# todo: find free alternative
+# typora only offers a limited time before a purchase
+# if [ $(hasPackage "typora") = "false" ] ; then
+#   loading=$(startLoading "Installing Typora")
+#   (
+#     sudo apt -y install typora &>/dev/null
+#     endLoading "$loading"
+#   ) &
+#   runLoading "$loading"
+# fi

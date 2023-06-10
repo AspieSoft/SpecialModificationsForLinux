@@ -5,8 +5,9 @@ if ! [[ $(crontab -l) == *"# aspiesoft-clamav-scan"* ]] ; then
   crontab -l | { cat; echo '0 2 * * * sudo clamscan -r --bell --move="/VirusScan/quarantine" --exclude-dir="/VirusScan/quarantine" --exclude-dir="/home/$USER/.clamtk/viruses" --exclude-dir="smb4k" --exclude-dir="/run/user/$USER/gvfs" --exclude-dir="/home/$USER/.gvfs" --exclude-dir=".thunderbird" --exclude-dir=".mozilla-thunderbird" --exclude-dir=".evolution" --exclude-dir="Mail" --exclude-dir="kmail" --exclude-dir="^/sys" / # aspiesoft-clamav-scan'; } | crontab -
 fi
 
+/etc/aspiesoft-clamav-scanner/linux-clamav-download-scanner/linux-clamav-download-scanner
 
-DIR="$PWD"
+#DIR="$PWD"
 
 # cd "$HOME"
 # for FILE in * ; do
@@ -18,7 +19,7 @@ DIR="$PWD"
 # done
 # cd "$DIR"
 
-bash /etc/aspiesoft-clamav-scanner/scan-downloads.sh "$HOME/Downloads" 3 &
+#bash /etc/aspiesoft-clamav-scanner/scan-downloads.sh "$HOME/Downloads" 3 &
 # bash /etc/aspiesoft-clamav-scanner/scan-downloads.sh "$HOME/Documents" 1 &
 # bash /etc/aspiesoft-clamav-scanner/scan-downloads.sh "$HOME/Pictures" 1 &
 # bash /etc/aspiesoft-clamav-scanner/scan-downloads.sh "$HOME/Videos" 1 &
