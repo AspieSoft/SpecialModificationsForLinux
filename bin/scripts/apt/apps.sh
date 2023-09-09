@@ -235,24 +235,6 @@ if [ $(hasPackage "obs-studio") = "false" ] ; then
 fi
 
 
-if [ $(hasPackage "atom") = "false" ] ; then
-  loading=$(startLoading "Installing Atom Text Editor")
-  (
-    sudo snap install --classic atom &>/dev/null
-
-    sudo mkdir -p $HOME/.atom &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* $HOME/.atom &>/dev/null
-
-    # for new users
-    sudo mkdir -p /etc/skel/.atom &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* /etc/skel/.atom &>/dev/null
-
-    endLoading "$loading"
-  ) &
-  runLoading "$loading"
-fi
-
-
 if [ $(hasPackage "code") = "false" ] ; then
   loading=$(startLoading "Installing VSCode")
   (

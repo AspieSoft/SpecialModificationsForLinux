@@ -60,18 +60,6 @@ loading=$(startLoading "Adding Repositorys")
     echo 'gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee -a "/etc/yum.repos.d/vscode.repo" &>/dev/null
   fi
 
-  # add repo for atom text editor
-  sudo rpm --import https://packagecloud.io/AtomEditor/atom/gpgkey
-  if ! test -f "/etc/yum.repos.d/atom.repo" ; then
-    echo '[Atom]' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
-    echo 'name=atom' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
-    echo 'baseurl=https://packagecloud.io/AtomEditor/atom/el/7/$basearch' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
-    echo 'enabled=1' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
-    echo 'gpgcheck=0' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
-    echo 'repo_gpgcheck=1' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
-    echo 'gpgkey=https://packagecloud.io/AtomEditor/atom/gpgkey' | sudo tee -a "/etc/yum.repos.d/atom.repo" &>/dev/null
-  fi
-
   sudo dnf check-update
 
 
@@ -282,24 +270,6 @@ if [ $(hasPackage "shotcut") = "false" ] ; then
   loading=$(startLoading "Installing Shotcut")
   (
     sudo flatpak install -y flathub org.shotcut.Shotcut &>/dev/null
-
-    endLoading "$loading"
-  ) &
-  runLoading "$loading"
-fi
-
-
-if [ $(hasPackage "atom") = "false" ] ; then
-  loading=$(startLoading "Installing Atom Text Editor")
-  (
-    sudo dnf -y install atom &>/dev/null
-
-    sudo mkdir -p $HOME/.atom &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* $HOME/.atom &>/dev/null
-
-    # for new users
-    sudo mkdir -p /etc/skel/.atom &>/dev/null
-    sudo cp -R -f ./bin/apps/atom/* /etc/skel/.atom &>/dev/null
 
     endLoading "$loading"
   ) &
